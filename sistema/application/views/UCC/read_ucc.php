@@ -22,7 +22,11 @@ $(document).ready(function() {
 		<tr>
 			<td><?=	$fila->ID_UCC;?></td>
 			<td><?= $fila->NOMBRE;?></td>
-			<td><a href="#">Editar</a> || <a href="#"> Eliminar</a></td>
+			<td><a href="<?php echo base_url();?>index.php/Ucc/update">Editar</a></td>
+			<td>||</td>
+			<td><a href="<?php echo base_url();?>index.php/Ucc/delete">Eliminar</a></td>
+			<td><a href="<?php echo base_url();?>index.php/Ucc/delete/?variable1=<?=$fila->ID_UCC;?>">Eliminar</a></td>
+
 		</tr>
 <?php
 } 

@@ -19,6 +19,21 @@ class Ucc extends CI_Controller {
 		$this->load->view('UCC/read_ucc', $data);
 		$this->load->view('footer');
 	}
+	
+	public function delete(){
+		$v1 = $_POST['variable1'];
+		$this->load->view('header');
+		$this->load->view('menu_lateral');
+		$this->load->view('UCC/delete_ucc', $v1);
+		$this->load->view('footer');
+	}
+
+	public function update(){
+		$this->load->view('header');
+		$this->load->view('menu_lateral');
+		$this->load->view('UCC/update_ucc');
+		$this->load->view('footer');
+	}
 	public function create(){
 		// if($this->input->post("submit")){
          
