@@ -1,5 +1,5 @@
 <body>     
-  <div class="container">
+  <div class="container" style="margin-left: 13%" >
       <h2>Crear nueva UCC</h2>
 
       <?php defined('BASEPATH') OR exit('No direct script access allowed');?>

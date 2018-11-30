@@ -1,5 +1,5 @@
 <body>     
-  <div class="container">
+  <div class="container" style="margin-left: 13%">
       <h2>Editar insumo</h2>
 
     
