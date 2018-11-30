@@ -1,1 +1,20 @@
-<h1>Editar</h1>
+<body>     
+  <div class="container">
+      <h2>Editar UCC</h2>
+
+    
+<form id="form" name="form" action="<?=base_url()?>index.php/Ucc/editarUCC/<?=$id?>" method="POST">
+      
+       <label for="NOMBRE">Nombre</label>
+       <input type="input" name="NOMBRE" value="<?=$NOMBRE?>" /><br />
+       <label for="NUMERO_UCC">Código</label>
+       <input type="input" name="NUMERO_UCC" value="<?=$NUMERO_UCC?>"/><br />
+       <label for="ANEXO">Anexo</label>
+       <input type="input" name="ANEXO" value="<?=$ANEXO?>"/><br />
+
+       <input type="submit" name="editar" value="Actualizar UCC" />
+</form>
+ 
+  </div>
+
+</body>
