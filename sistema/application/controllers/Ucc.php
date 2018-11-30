@@ -36,9 +36,9 @@ class Ucc extends CI_Controller {
 
 	public function editar(){
 		$id = $this->uri->segment(3);
-		$obtenerEnlace = $this->Ucc_model->obtenerEnlace($id);
-		if($obtenerEnlace != FALSE){
-			foreach($obtenerEnlace->result() as $row){
+		$obtenerUCC = $this->Ucc_model->obtenerUCC($id);
+		if($obtenerUCC != FALSE){
+			foreach($obtenerUCC->result() as $row){
 				$NOMBRE = $row->NOMBRE;
 				$NUMERO_UCC = $row->NUMERO_UCC;
 				$ANEXO = $row->ANEXO;

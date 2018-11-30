@@ -22,7 +22,7 @@
 </select>
 <br>
 <label> Sucursal </label>
-<select style="display: block;" name="selectSucurales" >
+<select style="display: block;" name="selectSucursales" >
   <?php foreach ($sucursales as $p => $q): ?>
     <option type="input"  value="<?php echo $q["ID_SUCURSAL"] ?>"><?php echo $q["NOMBRE_S"] ?></option>
   <?php endforeach ?>

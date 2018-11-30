@@ -35,7 +35,7 @@ class Ucc_model extends CI_Model {
 
   	}
 
-    function obtenerEnlace($id){
+    function obtenerUCC($id){
        $this->db->where('ID_UCC', $id);
        $query = $this->db->get('UCC');
        if ($query->num_rows() > 0){

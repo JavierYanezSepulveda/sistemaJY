@@ -57,11 +57,22 @@ class Insumos_model extends CI_Model {
         return $result;
   	}
 
-  	public function update(){
-
+  	public function obtenerInsumo($id){
+        $this->db->where('ID_INSUMO', $id);
+        $query = $this->db->get('INSUMO');
+        if ($query->num_rows() > 0){
+        return $query;
+       }else{
+        return FALSE;
+       }
 
 
   	}
+    public function editarInsumo($id, $data){
+        $this->db->where('ID_INSUMO', $id);
+        $this->db->update('INSUMO', $data);
+
+    }
 
   	public function delete($id){
   		$this->db->where('ID_INSUMO', $id);

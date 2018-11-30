@@ -12,6 +12,7 @@ $(document).ready(function(){
 </script></head>
 <div class="container" style="margin-left: 13%">
 	<h1>INSUMOS</h1>
+	
 	<div id="body">
 	<a href="<?php echo base_url();?>index.php/Insumos/add" class="btn btn-default">Añadir nuevo insumo</a>
 		<table border="1" align="center">
@@ -40,7 +41,7 @@ $(document).ready(function(){
 			<td><?= $fila['NOMBRE_P'];?></td>
 
 	
-			<td><a href="<?php echo base_url();?>index.php/Insumos/update/<?=$fila['ID_INSUMO'];?>">Editar</a></td>
+			<td><a href="<?php echo base_url();?>index.php/Insumos/editar/<?=$fila['ID_INSUMO'];?>">Editar</a></td>
 			<td><a class="delete" href="<?php echo base_url();?>index.php/Insumos/delete/<?=$fila['ID_INSUMO'];?> ">Eliminar</a></td>
 
 		</tr>
