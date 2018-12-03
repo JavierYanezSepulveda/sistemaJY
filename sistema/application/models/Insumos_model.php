@@ -57,7 +57,7 @@ class Insumos_model extends CI_Model {
         return $result;
   	}
 
-  	public function obtenerInsumo($id){
+  	public function obtener_insumo($id){
         $this->db->where('ID_INSUMO', $id);
         $query = $this->db->get('INSUMO');
         if ($query->num_rows() > 0){
@@ -65,10 +65,22 @@ class Insumos_model extends CI_Model {
        }else{
         return FALSE;
        }
-
-
+    }
+    public function obtener_proveedor($ID_PROVEEDOR){
+      $this->db->select('*');
+      $this->db->from('PROVEEDOR');
+      $this->db->where('ID_PROVEEDOR', $ID_PROVEEDOR);
+      $proveedor=$this->db->get();
+      return $proveedor->result_array();
+    }
+    public function obtener_sucursal($ID_SUCURSAL){
+      $this->db->select('*');
+      $this->db->from('SUCURSAL');
+      $this->db->where('ID_SUCURSAL', $ID_SUCURSAL);
+      $sucursal=$this->db->get();
+      return $sucursal->result_array();
   	}
-    public function editarInsumo($id, $data){
+    public function editar_insumo($id, $data){
         $this->db->where('ID_INSUMO', $id);
         $this->db->update('INSUMO', $data);
 

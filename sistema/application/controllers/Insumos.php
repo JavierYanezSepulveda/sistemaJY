@@ -54,7 +54,7 @@ class Insumos extends CI_Controller {
 	}
 	public function editar($id){
 		$id = $this->uri->segment(3);
-		$obtenerInsumo = $this->Insumos_model->obtenerInsumo($id);
+		$obtenerInsumo = $this->Insumos_model->obtener_insumo($id);
 		if($obtenerInsumo != FALSE){
 			foreach($obtenerInsumo->result() as $row){
 				$NOMBRE_I = $row->NOMBRE_I;
@@ -74,6 +74,14 @@ class Insumos extends CI_Controller {
 							'ID_SUCURSAL' => $ID_SUCURSAL
 
 						);
+			$proveedores = $this->Insumos_model->obtener_proveedores();
+			$sucursales = $this->Insumos_model->obtener_sucursales();
+			$data['proveedores'] = $proveedores;
+			$data['sucursales'] = $sucursales;
+			$proveedor = $this->Insumos_model->obtener_proveedor($ID_PROVEEDOR);
+			$sucursal = $this->Insumos_model->obtener_sucursal($ID_SUCURSAL);
+			$data['proveedor'] = $proveedor;
+			$data['sucursal'] = $sucursal;
 		}else{
 			return FALSE;
 		}
@@ -83,19 +91,23 @@ class Insumos extends CI_Controller {
 	}
 	public function editarInsumo(){
 		$id = $this->uri->segment(3);
+		
 		$data = array(
 						'NOMBRE_I' => $this->input->post('NOMBRE_I', true),
 						'PRECIO_C' => $this->input->post('PRECIO_C', true),
 						'MARCA' => $this->input->post('MARCA', true),
 						'STOCK' => $this->input->post('STOCK', true),
-						'ID_PROVEEDOR' => $this->input->post('ID_PROVEEDOR', true),
-						'ID_SUCURSAL' => $this->input->post('ID_SUCURSAL', true)
+						'ID_PROVEEDOR' => $this->input->post('selectProveedores', true),
+						'ID_SUCURSAL' => $this->input->post('selectSucursales', true),
+
 		);
-		$this->Insumos_model->editarInsumo($id, $data);	
+
+		$this->Insumos_model->editar_insumo($id, $data);	
 		
 		$this->load->view('header');
 		$this->load->view('menu_lateral');
 		$data['Insumos'] = $this->Insumos_model->obtener_todos();
+		
 		$this->load->view('Insumos/read_insumos', $data);
 		$this->load->view('footer');
 	}

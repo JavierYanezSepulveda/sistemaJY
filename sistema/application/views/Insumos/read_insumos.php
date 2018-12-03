@@ -29,7 +29,6 @@ $(document).ready(function(){
 			</tr>
 
 <?php 
-
 	foreach ($Insumos as $fila) {?>
 		
 		<tr>
