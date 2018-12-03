@@ -78,6 +78,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url();?>index.php/Sucursales/index" >
+                  <span data-feather="layers"></span>
+                  Sucursales
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="#" >
                   <span data-feather="settings"></span>
                   Configuraciones
