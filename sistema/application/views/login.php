@@ -9,21 +9,21 @@
 						<img src="/assets/img/logo.png" alt="" style="display: block; width: 79%; float: right; margin-top: -16px; ">
 					</div>
 					<div class="col s12">
-						<h2 class="center" style="width: 34%;font-size: 22px;"> Acceso Portal Habilita UCM </h2>	
+						<h2 class="center" style="width: 34%;font-size: 22px;"> Acceso Central de Apuntes </h2>	
 					</div>
 						
 					
 				</div>
-				<form action="" method="post">
+				<form action="<?=base_url()?>index.php/Usuarios/iniciar_sesion_post" method="post">
 					<div class="col s12">
 						<label for="">Usuario</label>
 						<h1></h1>
-						<input type="text" name="rut" id="rut" style="width: 40%" placeholder="Ej: 12345678">
+						<input type="text" name="RUT" id="RUT" style="width: 40%" placeholder="Ej: 12345678">
 					</div>
 					<div class="col s12">
 						<label for="">Clave</label>
 						<h1></h1>
-						<input type="password" name="password" id="password" style="width: 40%" placeholder="********">
+						<input type="password" name="CLAVE" id="CLAVE" style="width: 40%" placeholder="********">
 					</div>
 					<div class="col s12">
 						<input type="submit" value="Ingresar" class="btn UCM " style="width: 40%; margin-bottom: 25px;">
