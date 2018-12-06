@@ -42,7 +42,6 @@ $(document).ready(function(){
 	
 			<td><a href="<?php echo base_url();?>index.php/Insumos/editar/<?=$fila['ID_INSUMO'];?>">Editar</a></td>
 			<td><a class="delete" href="<?php echo base_url();?>index.php/Insumos/delete/<?=$fila['ID_INSUMO'];?> ">Eliminar</a></td>
-
 		</tr>
 <?php
 } 

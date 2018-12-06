@@ -23,9 +23,11 @@ class Ventas extends CI_Controller {
 		// $UCC = $this->Ventas_model->obtener_ucc();
         $tipo_v = $this->Ventas_model->obtener_tipo_v();
 		$sucursales = $this->Ventas_model->obtener_sucursales();
+		$productos = $this->Ventas_model->obtener_productos(1);
 		$data = array(
 						"tipo_v" => $tipo_v,
 						"sucursales" => $sucursales,
+						"productos" => $productos
 						// "UCC" => $UCC
 						);
 

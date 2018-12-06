@@ -19,7 +19,7 @@
 </select>
 <br> -->
        <label> TIPO DE VENTA</label>
-       <select style="display: block;" name="selectTipo_venta">
+       <select style="display: block;" name="selectTipo_venta" >
        <?php foreach ($tipo_v as $k => $v): ?>
         <option type="input" value="<?php echo $v["ID_TIPO_VENTA"] ?>" required><?php echo $v["NOMBRE"] ?></option>
         <?php endforeach ?>
@@ -32,10 +32,50 @@
     <option type="input"  value="<?php echo $q["ID_SUCURSAL"] ?>" required><?php echo $q["NOMBRE_S"] ?></option>
   <?php endforeach ?>
 </select> 
+<br>
+  <div id="seccionProductos"></div>
+  <div id="total"></div>
+  <div id="jsAux"></div>
 
-       <input type="submit" name="editar" value="Agregar insumo" />
+       <input type="button" name="editar" id="addItem" value="+ Agregar producto" class="btn btn-default" />
+       <br>
+       <br>
+       <label>Finalizar venta</label>
+       <br>
+       <input type="submit" name="venta" value="Finalizar venta" class="btn btn-default" />
 </form>
  
   </div>
 
 </body>
+
+<script type="text/javascript">
+  $("#addItem").on("click", function(event){
+    var productos = <?php echo json_encode($productos) ?>;
+    var tpl = "";
+    tpl += "<div class=\"row newProduct\" ><div class=\"col s12 m6 l4\"><select class=\"browser-default select-producto\" name=\"producto\" id=\"producto\">";
+    for(var i = 0; i < productos.length; i++){
+      tpl += "<option id=\"prod"+productos[i].ID_PRODUCTO+"\" value=\""+productos[i].ID_PRODUCTO+"\" valor=\""+productos[i].PRECIO_V+"\" data-valor=\""+productos[i].PRECIO_V+"\">"+productos[i].NOMBRE+"</option>";
+    }
+    tpl += "</select></div><div class=\"col s12 m6 l4 input-field\"><input type=\"number\" class=\"valor\" name=\"cantidad\"><label for=\"\">Cantidad</label></div></div>";
+    // console.log(tpl);
+    $("#seccionProductos").append(tpl);
+
+    script = '<script>var total = 0; $(".valor").on("keyup", function(e){';
+    script += 'var largo = ($(".newProduct").length); total = 0;' ;
+    script += '$.each($(".newProduct"), function( index, elemento ) {';
+    script += 'var id = $(elemento).children("div").children("select").val();';
+    script += 'total += parseInt($(elemento).children("div").children(".valor").val())*parseInt($("#prod"+id).data("valor"));';
+    script += '}); $("#total").html(total); });';
+    script += '\n';
+    script += '$(".select-producto").on("change", function(e){';
+    script += 'var largo = ($(".newProduct").length); total = 0;' ;
+    script += '$.each($(".newProduct"), function( index, elemento ) {';
+    script += 'var id = $(elemento).children("div").children("select").val();';
+    script += 'total += parseInt($(elemento).children("div").children(".valor").val())*parseInt($("#prod"+id).data("valor"));';
+    script += '}); $("#total").html(total); })<\/script>';
+    $("#jsAux").html(script);
+  });
+   
+
+</script>

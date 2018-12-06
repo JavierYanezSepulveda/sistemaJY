@@ -74,6 +74,16 @@ class Ventas_model extends CI_Model {
         return FALSE;
        }
     }
+
+    
+    public function obtener_productos($ID_SUCURSAL){
+      $this->db->select('*');
+      $this->db->from('PRODUCTO');
+      $this->db->where('ID_SUCURSAL', $ID_SUCURSAL);
+      $proveedor=$this->db->get();
+      return $proveedor->result_array();
+    }
+    
     public function obtener_proveedor($ID_PROVEEDOR){
       $this->db->select('*');
       $this->db->from('PROVEEDOR');
