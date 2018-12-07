@@ -50,14 +50,14 @@ class Ventas_model extends CI_Model {
     //   return  $result->result_array();
 
     // }
-  	public function add_venta(){
+  	public function add_venta($total){
   	    $id_s = $this->session->userdata('ID_SUCURSAL');
         $id_u = $this->session->userdata('RUT');
         $N_BOLETA = $this->input->post('N_BOLETA', true);
         $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
         $TIPO_VENTA = $this->input->post('selectTipo_venta', true);
   
-    $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, Observacion,ID_Sucursal)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , null, 24, '$TIPO_VENTA', 1000, null, '$id_s')";
+    $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, Observacion,ID_Sucursal)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , TO_DATE('$FECHA_INGRESO','YYYY-MM-DD'), 61, '$TIPO_VENTA', '$total', null, '$id_s')";
         $result = $this->db->query($data);
         
   	}
@@ -69,6 +69,15 @@ class Ventas_model extends CI_Model {
         $data = "INSERT INTO ITEMS_VENTA(ID_ITEMS_VENTA, ID_VENTA, ID_PRODUCTO, CANTIDAD) VALUES (venta_seq.nextval, '$ultimo', '$n', '$m')";
         $result = $this->db->query($data);
 
+    }
+    public function total($id_producto){
+
+      $this->load->database('SCA');
+      $this->db->select('PRECIO_V');
+      $this->db->from('PRODUCTO');
+      $this->db->where('ID_PRODUCTO', $id_producto);
+      $result = $this->db->get();
+      return  $result->result_array();
     }
 
   	public function obtener_insumo($id){

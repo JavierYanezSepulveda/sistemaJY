@@ -42,32 +42,39 @@ class Ventas extends CI_Controller {
 			$filas[] = $fila;
 			$valores[] = $valor;
 		}
-		
-		$this->Ventas_model->add_venta();
 		$x = count($data)-1;
-		$e=1;
-		$f=2;
 		$cantidad = 'cantidad';
-		echo "........";
+		$total= 0 ;
+		for($j=1;$j<=($x-2)/2; $j++){
+			$n=$data[$j];
+			$m=$data[$cantidad.$j];
+			$precio = $this->Ventas_model->total($n);
+			$precio2= $precio[0];
+			// print_r($precio[0]);
+			$precio_total = $precio2['PRECIO_V']*$m;
+			$total=$total+$precio_total; 
+		}
+		$this->Ventas_model->add_venta($total);
+		
+		
 		$ultimo_id_venta = $this->db->select('ID_VENTA')->from('VENTA')->order_by('ID_VENTA',"desc")->limit(1)->get()->row(); 
         
     $ultimo_id_venta = (array) $ultimo_id_venta;
-    var_dump($ultimo_id_venta);
+
     $ultimo=$ultimo_id_venta['ID_VENTA'];
-	echo $data[$e];
-	echo $data[$f];
+	
 		for($j=1;$j<=($x-2)/2; $j++){
 			$n=$data[$j];
 			$m=$data[$cantidad.$j];
 			$this->Ventas_model->add_venta_producto($n,$m,$ultimo);
 			
 		}
-		 
-		echo('<pre>');
-		var_dump($_POST);
-echo('<pre>');
+		 echo "<script>alert('¡Venta realizada!.');</script>";
+
+ 		redirect('Ventas/add', 'refresh');
+		
 	
-	redirect('Ventas/add');
+	// redirect('Ventas/add');
 
 	}
 
