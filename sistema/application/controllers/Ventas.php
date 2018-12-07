@@ -21,14 +21,12 @@ class Ventas extends CI_Controller {
 	}
 	public function add(){
 		// $UCC = $this->Ventas_model->obtener_ucc();
+		$id_s = $this->session->userdata('ID_SUCURSAL');
         $tipo_v = $this->Ventas_model->obtener_tipo_v();
-		$sucursales = $this->Ventas_model->obtener_sucursales();
-		$productos = $this->Ventas_model->obtener_productos(1);
+		$productos = $this->Ventas_model->obtener_productos($id_s);
 		$data = array(
 						"tipo_v" => $tipo_v,
-						"sucursales" => $sucursales,
 						"productos" => $productos
-						// "UCC" => $UCC
 						);
 
         $this->load->view('header');
@@ -38,13 +36,39 @@ class Ventas extends CI_Controller {
 		
 	
 	}
-	public function addInsumo(){
-		$this->Insumos_model->add();
-		$this->load->view('header');
-		$this->load->view('menu_lateral');
-		$data['Insumos'] = $this->Insumos_model->obtener_todos();
-		$this->load->view('Insumos/read_insumos', $data);
-		$this->load->view('footer');
+	public function addVenta(){
+		$data = $_POST;
+		foreach($data as $fila => $valor) {
+			$filas[] = $fila;
+			$valores[] = $valor;
+		}
+		
+		$this->Ventas_model->add_venta();
+		$x = count($data)-1;
+		$e=1;
+		$f=2;
+		$cantidad = 'cantidad';
+		echo "........";
+		$ultimo_id_venta = $this->db->select('ID_VENTA')->from('VENTA')->order_by('ID_VENTA',"desc")->limit(1)->get()->row(); 
+        
+    $ultimo_id_venta = (array) $ultimo_id_venta;
+    var_dump($ultimo_id_venta);
+    $ultimo=$ultimo_id_venta['ID_VENTA'];
+	echo $data[$e];
+	echo $data[$f];
+		for($j=1;$j<=($x-2)/2; $j++){
+			$n=$data[$j];
+			$m=$data[$cantidad.$j];
+			$this->Ventas_model->add_venta_producto($n,$m,$ultimo);
+			
+		}
+		 
+		echo('<pre>');
+		var_dump($_POST);
+echo('<pre>');
+	
+	redirect('Ventas/add');
+
 	}
 
 	public function delete($id){
