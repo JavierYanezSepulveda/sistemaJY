@@ -32,13 +32,14 @@
       <script src="<?php echo base_url();?>/assets/js/popper.min.js" ></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>
       <!-- <script type="text/javascript" charset="utf8" src="<?php echo base_url();?>/assets/js/jquery.dataTables.js"></script> -->
-      <script src="<?php echo base_url();?>/assets/js/jquery.js"></script>      
+      <!-- <script src="<?php echo base_url();?>/assets/js/jquery.js"></script>       -->
       <!-- <script src="<?php echo base_url(); ?>/assets/js/ajax.js"></script> -->
       <script src="<?php echo base_url();?>/assets/js/materialize.js"></script>
       <script src="<?php echo base_url();?>/assets/js/sweetalert.min.js"></script>
       <script src="<?php echo base_url();?>/assets/js/smooth-scroll.js"></script>     
       <script src="<?php echo base_url();?>/assets/js/wow.min.js"></script>
-      <script src="<?php echo base_url();?>/assets/js/jquery.dataTables.min.js"></script>
+      <!-- <script src="<?php echo base_url();?>/assets/js/jquery.dataTables.min.js"></script> -->
+      <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
       <script src="<?php echo base_url();?>/assets/js/notif.js"></script>
       <script src="<?php echo base_url();?>/assets/js/xlsx.core.js"></script>
       <script src="<?php echo base_url();?>/assets/js/FileSaver.js"></script>

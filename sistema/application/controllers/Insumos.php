@@ -44,9 +44,9 @@ class Insumos extends CI_Controller {
 
 	public function delete($id){
 		$this->load->helper('url');
-          $id = $this->uri->segment(3);
-          $item = $this->Insumos_model->delete($id);
-          $this->load->view('header');
+        $id = $this->uri->segment(3);
+        $item = $this->Insumos_model->delete($id);
+        $this->load->view('header');
 		$this->load->view('menu_lateral');
 		$data['Insumos'] = $this->Insumos_model->obtener_todos();
 		$this->load->view('Insumos/read_insumos', $data);

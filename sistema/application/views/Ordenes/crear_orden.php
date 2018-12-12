@@ -5,13 +5,21 @@
      
 <body>     
   <div class="container" style="margin-left: 13%">
-    <h2>Crear nueva venta</h2>
-      <a href="<?php echo base_url();?>index.php/Ventas/lista_ventas" class="btn btn-default" style="margin-left: 70%">Lista de ventas</a>
-      <form id="form" name="form" action="<?=base_url()?>index.php/Ventas/addVenta" method="POST">
-        <label for="N_BOLETA">N° BOLETA</label><br>
-        <input type="number" name="N_BOLETA" value="" min="0" max="9999999999" size="30" required/><br />
+    <h2>Crear nueva orden</h2>
+      <a href="<?php echo base_url();?>index.php/Ordenes/lista_ordenes" class="btn btn-default" style="margin-left: 70%">Lista de ordenes</a>
+      <form id="form" name="form" action="<?=base_url()?>index.php/Ordenes/addOrden" method="POST">
+        <label for="N_ORDEN">N° ORDEN</label><br>
+        <input type="number" name="N_ORDEN" value="" min="0" max="9999999999" size="30" required/><br />
         <label for="FECHA_INGRESO">FECHA DE INGRESO</label><br>
         <input type="date" name="FECHA_INGRESO" value="<?php echo date("Y-m-d");?>" size="30" required/><br />
+        <br>
+        <label> UCC </label>
+        <select style="display: block; width: 30%;" name="selectUCC" class="col s12 m6 l4 input-field">
+        <?php foreach ($UCC as $k => $v): ?>
+        <option type="input" value="<?php echo $v["ID_UCC"] ?>" required><?php echo $v["NOMBRE"] ?></option>
+        <?php endforeach ?>
+
+        </select>
         <br>
         <label for="Productos">Productos</label><br>
         <div id="seccionProductos"></div>
@@ -21,9 +29,9 @@
         <input type="button" name="editar" id="addItem" value="+ Agregar producto" class="btn btn-default " />
         <br>
         <br>
-        <label>Finalizar venta</label>
+        <label>Finalizar orden</label>
         <br>
-        <input type="submit" value="Finalizar venta" class="btn btn-default" "/>
+        <input type="submit" value="Finalizar orden" class="btn btn-default" "/>
       </form>
  
   </div>

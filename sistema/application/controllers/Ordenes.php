@@ -1,12 +1,14 @@
  <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Ventas extends CI_Controller {
+class Ordenes extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper("url");
+		$this->load->model("Ordenes_model");
 		$this->load->model("Ventas_model");
+		$this->load->model("Ucc_model");
 		$this->load->library("session");
 		$this->load->database();
 	}
@@ -14,29 +16,31 @@ class Ventas extends CI_Controller {
 	public function add(){
 		// $UCC = $this->Ventas_model->obtener_ucc();
 		$id_s = $this->session->userdata('ID_SUCURSAL');
-        $tipo_v = $this->Ventas_model->obtener_tipo_v();
-		$productos = $this->Ventas_model->obtener_productos($id_s);
+        $productos = $this->Ventas_model->obtener_productos($id_s);
+        $UCC = $this->Ucc_model->obtener_todos();
 		$data = array(
-						"tipo_v" => $tipo_v,
-						"productos" => $productos
+						"productos" => $productos,
+						"UCC" => $UCC 
 						);
 
         $this->load->view('header');
 		$this->load->view('menu_lateral');
-		$this->load->view("Ventas/crear_venta",$data);
+		$this->load->view('Ordenes/crear_orden',$data);
 		$this->load->view('footer');
 		
 	
 	}
-	public function addVenta(){
+	public function addOrden(){
 		$data = $_POST;
-				
+		echo('<pre>');		
+		var_dump($data);
+		echo('</pre>');
 				foreach($data as $fila => $valor) {
 					$filas[] = $fila;
 					$valores[] = $valor;
 				}
 
-		$x = count($data);
+		$x = count($data)-1;
 		$cantidad = 'cantidad';
 		$total= 0 ;
 				
@@ -48,17 +52,24 @@ class Ventas extends CI_Controller {
 					// print_r($precio[0]);
 					$precio_total = $precio2['PRECIO_V']*$m;
 					$total=$total+$precio_total; 
+				echo('<pre>');		
+		var_dump($n, $m, $precio_total, $total);
+		echo('</pre>');
+
 				}
 
-		$this->Ventas_model->add_venta($total);
-		$ultimo_id_venta = $this->db->select('ID_VENTA')->from('VENTA')->where('N_ORDEN', null)->order_by('ID_VENTA',"desc")->limit(1)->get()->row(); 
-        $ultimo_id_venta = (array) $ultimo_id_venta;
-        $ultimo=$ultimo_id_venta['ID_VENTA'];
+
+		$this->Ordenes_model->add_orden($total);
+		$ultimo_id_orden = $this->db->select('ID_VENTA')->from('VENTA')->where('N_BOLETA', null)->order_by('ID_VENTA',"desc")->limit(1)->get()->row(); 
+        $ultimo_id_orden = (array) $ultimo_id_orden;
+        $ultimo=$ultimo_id_orden['ID_VENTA'];
+
+        var_dump($ultimo);
 				
 				for($j=1;$j<=($x-2)/2; $j++){
 					$n=$data[$j];
 					$m=$data[$cantidad.$j];
-					$this->Ventas_model->add_venta_producto($n,$m,$ultimo);
+					$this->Ordenes_model->add_orden_producto($n,$m,$ultimo);
 					$insumo_1 = $this->Ventas_model->insumo($n);
 					$insumo = $insumo_1[0]['ID_INSUMO'];
 					$stock_1 = $this->Ventas_model->stock($insumo);
@@ -69,26 +80,26 @@ class Ventas extends CI_Controller {
 				}		
 		
 		echo "<script>alert('¡Venta realizada!.');</script>";
- 		redirect('Ventas/add', 'refresh');
+ 		redirect('Ordenes/add', 'refresh');
 	}
 
-	public function lista_ventas(){
-		$data['Ventas'] = $this->Ventas_model->obtener_ventas();
+	public function lista_ordenes(){
+		$data['Ventas'] = $this->Ordenes_model->obtener_ordenes();
 		$this->load->view('header');
 		$this->load->view('menu_lateral');
-		$this->load->view('Ventas/read_ventas',$data);
+		$this->load->view('Ordenes/read_ordenes',$data);
 		$this->load->view('footer');
 
 
 	}
 
-	public function detalle_venta($id){
+	public function detalle_orden($id){
 		$this->load->helper('url');
         $id = $this->uri->segment(3);
         $data['Detalle'] = $this->Ventas_model->detalle_venta($id);
         $this->load->view('header');
 		$this->load->view('menu_lateral');
-		$this->load->view('Ventas/read_venta_detalle',$data);
+		$this->load->view('Ordenes/read_orden_detalle',$data);
 		$this->load->view('footer');
 
 	}

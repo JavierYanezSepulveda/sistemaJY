@@ -5718,6 +5718,7 @@ label {
 /* Style Placeholders */
 ::-webkit-input-placeholder {
   color: #d1d1d1;
+  width: 30px;
 }
 
 :-moz-placeholder {
@@ -5725,7 +5726,7 @@ label {
   color: #d1d1d1;
 }
 
-::-moz-placeholder {
+::-moz-placeholder { 
   /* Firefox 19+ */
   color: #d1d1d1;
 }
@@ -5754,7 +5755,7 @@ textarea.materialize-textarea {
   border-radius: 0;
   outline: none;
   height: 3rem;
-  width: 100%;
+  width: 30%;
   font-size: 1rem;
   margin: 0 0 20px 0;
   padding: 0;
@@ -6598,6 +6599,7 @@ select {
   border: 1px solid #f2f2f2;
   border-radius: 2px;
   height: 3rem;
+  display: block;
 }
 
 .select-label {

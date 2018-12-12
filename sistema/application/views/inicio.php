@@ -4,7 +4,7 @@
 	<br><br>
 
 <a href="<?php echo base_url();?>index.php/Ventas/add" class="btn btn-default">Ventas</a>
-<a href="<?php echo base_url();?>index.php/Usuarios/logueado/" class="btn btn-default">Ordenes</a>
+<a href="<?php echo base_url();?>index.php/Ordenes/add" class="btn btn-default">Ordenes</a>
 <a href="<?php echo base_url();?>index.php/Usuarios/logueado/" class="btn btn-default">Compras</a>
 <a href="<?php echo base_url();?>index.php/Usuarios/logueado/" class="btn btn-default">Becas</a><br><br>
 <a href="<?php echo base_url();?>index.php/Usuarios/logueado/" class="btn btn-default">Informes</a>

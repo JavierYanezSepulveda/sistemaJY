@@ -1,5 +1,5 @@
 <?php
-class Ventas_model extends CI_Model { 
+class Ordenes_model extends CI_Model { 
   	public function __construct() {
      parent::__construct();
      $this->load->database();
@@ -19,35 +19,27 @@ class Ventas_model extends CI_Model {
     }
   
   
-  	public function add_venta($total){
+  	public function add_orden($total){
 
   	  $id_s = $this->session->userdata('ID_SUCURSAL');
       $id_u = $this->session->userdata('RUT');
-      $N_BOLETA = $this->input->post('N_BOLETA', true);
+      $N_ORDEN = $this->input->post('N_ORDEN', true);
+      $UCC = $this->input->post('selectUCC', true);
       $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
       $TIPO_VENTA = $this->input->post('selectTipo_venta', true);
-      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, Observacion,ID_Sucursal)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, '$TIPO_VENTA', '$total', null, '$id_s')";
+      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, Observacion,ID_Sucursal)values (venta_seq.nextval, '$id_u', null,'$N_ORDEN' , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), '$UCC', '$TIPO_VENTA', '$total', null, '$id_s')";
       $result = $this->db->query($data);
         
   	}
 
-    public function add_venta_producto($n,$m,$ultimo){
+    public function add_orden_producto($n,$m,$ultimo){
 
         $data = "INSERT INTO ITEMS_VENTA(ID_ITEMS_VENTA, ID_VENTA, ID_PRODUCTO, CANTIDAD) VALUES (venta_seq.nextval, '$ultimo', '$n', '$m')";
         $result = $this->db->query($data);
 
     }
 
-    public function total($id_producto){
-
-      $this->load->database('SCA');
-      $this->db->select('PRECIO_V');
-      $this->db->from('PRODUCTO');
-      $this->db->where('ID_PRODUCTO', $id_producto);
-      $result = $this->db->get();
-      return  $result->result_array();
-
-    }
+    
     
     public function obtener_productos($ID_SUCURSAL){
       
@@ -86,12 +78,12 @@ class Ventas_model extends CI_Model {
       $this->db->update('INSUMO');
 
     }
-    public function obtener_ventas(){
+    public function obtener_ordenes(){
 
       $this->load->database('SCA');
       $this->db->select('*');
       $this->db->from('VENTA');
-      $this->db->where('N_ORDEN', null);
+      $this->db->where('N_BOLETA', null);
       $this->db->order_by('FECHA_INGRESO', 'asc');
       $result = $this->db->get();
       return  $result->result_array();

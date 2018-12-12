@@ -58,6 +58,7 @@ label {
 
 input[type=text]:disabled{
 	color: #333;
+    width: 40px;
 }
 span.info{
 	display: block;

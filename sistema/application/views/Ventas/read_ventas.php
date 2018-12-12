@@ -1,53 +1,68 @@
-<head><script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script language="JavaScript" type="text/javascript">
-$(document).ready(function(){
-    $("a.delete").click(function(e){
-        if(!confirm('¿Está seguro que desea eliminar este elemento?')){
-            e.preventDefault();
-            return false;
-        }
-        return true;
-    });
-});
-</script></head>
-<div class="container" style="margin-left: 13%">
-	<h1>INSUMOS</h1>
+<head>
+	<script language="JavaScript" type="text/javascript">
+		$(document).ready(function(){
+    		$("a.delete").click(function(e){
+        		if(!confirm('¿Está seguro que desea eliminar este elemento?')){
+        	    	e.preventDefault();
+        	    	return false;
+        		}
+        		return true;
+    		});
+		});
+	</script>
 	
-	<div id="body">
-	<a href="<?php echo base_url();?>index.php/Insumos/add" class="btn btn-default">Añadir nuevo insumo</a>
-		<table border="1" align="center">
-			<tr>
-				<th>ID</th>
-				<th>Nombre</th>
-				<th>Precio de compra</th>
-				<th>Marca</th>
-				<th>Stock</th>
-				<th>Proveedor</th>
-				<!-- <th>Sucursal</th> -->
-				<th>Editar</th>
-				<th>Eliminar</th>
-			</tr>
+	<script>
+    	$(document).ready(function () {
+        	$("#grid").DataTable({
+        		
 
-<?php 
-	foreach ($Insumos as $fila) {?>
+
+        	});
+    	});
+	</script>
+</head>
+
+<div id="someDiv" class="container" style="margin-left: 13%">
+	<h1>VENTAS</h1>
+
+		<div id="body">
+			<table id="grid" class="table table-striped table-bordered dt-responsive nowrap" border="1" align="center">
+				<thead>
+					<tr>
+						<th>ID Venta</th>
+						<th>ID Usuario</th>
+						<th>N° Boleta</th>
+						<th>Fecha Venta</th>
+						<th>Total</th>
+						<th>Detalle</th>
+						<th>Editar</th>
+						<th>Eliminar</th>
+					</tr>
+				</thead>
+<tbody>
+	<?php 
+
+		foreach ($Ventas as $fila) {
+	?>
+			
+				<tr>
+					<td><?=	$fila['ID_VENTA'];?></td>
+					<td><?= $fila['ID_USUARIO'];?></td>
+					<td><?= $fila['N_BOLETA'];?></td>
+					<td><?= $fila['FECHA_INGRESO'];?></td>
+					<td><?= $fila['TOTAL'];?></td>
+					<td><a href="<?php echo base_url();?>index.php/Ventas/detalle_venta/<?=$fila['ID_VENTA'];?>">Detalle</a></td>
+					<td><a href="<?php echo base_url();?>index.php/Ventas/editar/<?=$fila['ID_VENTA'];?>">Editar</a></td>
+					<td><a class="delete" href="<?php echo base_url();?>index.php/Ventas/delete/<?=$fila['ID_VENTA'];?> ">Eliminar</a>	</td>	
 		
-		<tr>
-			<td><?=	$fila['ID_INSUMO'];?></td>
-			<td><?= $fila['NOMBRE_I'];?></td>
-			<td><?= $fila['PRECIO_C'];?></td>
-			<td><?= $fila['MARCA'];?></td>
-			<td><?= $fila['STOCK'];?></td>
-			<td><?= $fila['NOMBRE_P'];?></td>
-
-	
-			<td><a href="<?php echo base_url();?>index.php/Insumos/editar/<?=$fila['ID_INSUMO'];?>">Editar</a></td>
-			<td><a class="delete" href="<?php echo base_url();?>index.php/Insumos/delete/<?=$fila['ID_INSUMO'];?> ">Eliminar</a></td>
-
-		</tr>
-<?php
-} 
-?>
-		</table>
+				</tr>
+	<?php
+		} 
+	?>
+				
+				
+</tbody>
+			</table>
 		
-	</div>	
+		</div>	
 </div>
