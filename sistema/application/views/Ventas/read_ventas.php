@@ -11,15 +11,7 @@
 		});
 	</script>
 	
-	<script>
-    	$(document).ready(function () {
-        	$("#grid").DataTable({
-        		
-
-
-        	});
-    	});
-	</script>
+	
 </head>
 
 <div id="someDiv" class="container" style="margin-left: 13%">

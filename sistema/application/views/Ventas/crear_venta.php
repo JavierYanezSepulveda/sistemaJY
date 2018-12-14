@@ -15,6 +15,7 @@
         <br>
         <label for="Productos">Productos</label><br>
         <div id="seccionProductos"></div>
+        <label>Total:</label>
         <div id="total"></div>
         <div id="jsAux"></div>
         <body onload="clickButton()">

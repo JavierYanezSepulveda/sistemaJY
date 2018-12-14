@@ -15,14 +15,16 @@ $(document).ready(function(){
 	
 	<div id="body">
 	<a href="<?php echo base_url();?>index.php/Proveedores/add" class="btn btn-default">Añadir nuevo proveedor</a>
-		<table border="1" align="center">
+		<table id="grid" class="table table-striped table-bordered dt-responsive nowrap" border="1" align="center">
+			<thead>
 			<tr>
 				<th>ID</th>
 				<th>Nombre</th>
 				<th>Teléfono</th>
 				<th>Dirección</th>
 			</tr>
-
+			</thead>
+<tbody>
 <?php 
 
 	foreach ($Proveedores as $fila) {?>
@@ -41,6 +43,7 @@ $(document).ready(function(){
 <?php
 } 
 ?>
+</tbody>
 		</table>
 		
 	</div>	

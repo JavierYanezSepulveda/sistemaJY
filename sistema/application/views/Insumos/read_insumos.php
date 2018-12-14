@@ -15,7 +15,8 @@ $(document).ready(function(){
 	
 	<div id="body">
 	<a href="<?php echo base_url();?>index.php/Insumos/add" class="btn btn-default">Añadir nuevo insumo</a>
-		<table border="1" align="center">
+		<table id="grid" class="table table-striped table-bordered dt-responsive nowrap" border="1" align="center">
+			<thead>
 			<tr>
 				<th>ID</th>
 				<th>Nombre</th>
@@ -23,11 +24,11 @@ $(document).ready(function(){
 				<th>Marca</th>
 				<th>Stock</th>
 				<th>Proveedor</th>
-				<!-- <th>Sucursal</th> -->
 				<th>Editar</th>
 				<th>Eliminar</th>
 			</tr>
-
+			</thead>
+<tbody>
 <?php 
 	foreach ($Insumos as $fila) {?>
 		
@@ -46,6 +47,7 @@ $(document).ready(function(){
 <?php
 } 
 ?>
+</tbody>
 		</table>
 		
 	</div>	

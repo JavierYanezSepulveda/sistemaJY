@@ -15,13 +15,15 @@ $(document).ready(function(){
 	
 	<div id="body">
 	<a href="<?php echo base_url();?>index.php/Sucursales/add" class="btn btn-default">Añadir nueva sucursal</a>
-		<table border="1" align="center">
+		<table id="grid" class="table table-striped table-bordered dt-responsive nowrap" border="1" align="center">
+			<thead>
 			<tr>
 				<th>ID</th>
 				<th>Nombre</th>
 				<th>Ciudad</th>
 			</tr>
-
+			</thead>
+<tbody>
 <?php 
 
 	foreach ($Sucursales as $fila) {?>
@@ -38,6 +40,7 @@ $(document).ready(function(){
 <?php
 } 
 ?>
+</tbody>
 		</table>
 		
 	</div>	

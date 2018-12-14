@@ -53,3 +53,12 @@
             return confirm( mensaje );
           } 
       </script>
+      <script>
+      $(document).ready(function () {
+          $("#grid").DataTable({
+            
+
+
+          });
+      });
+  </script>

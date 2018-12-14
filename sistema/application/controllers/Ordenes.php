@@ -14,7 +14,6 @@ class Ordenes extends CI_Controller {
 	}
 	
 	public function add(){
-		// $UCC = $this->Ventas_model->obtener_ucc();
 		$id_s = $this->session->userdata('ID_SUCURSAL');
         $productos = $this->Ventas_model->obtener_productos($id_s);
         $UCC = $this->Ucc_model->obtener_todos();
@@ -32,9 +31,6 @@ class Ordenes extends CI_Controller {
 	}
 	public function addOrden(){
 		$data = $_POST;
-		echo('<pre>');		
-		var_dump($data);
-		echo('</pre>');
 				foreach($data as $fila => $valor) {
 					$filas[] = $fila;
 					$valores[] = $valor;
@@ -52,10 +48,7 @@ class Ordenes extends CI_Controller {
 					// print_r($precio[0]);
 					$precio_total = $precio2['PRECIO_V']*$m;
 					$total=$total+$precio_total; 
-				echo('<pre>');		
-		var_dump($n, $m, $precio_total, $total);
-		echo('</pre>');
-
+				
 				}
 
 
@@ -64,7 +57,7 @@ class Ordenes extends CI_Controller {
         $ultimo_id_orden = (array) $ultimo_id_orden;
         $ultimo=$ultimo_id_orden['ID_VENTA'];
 
-        var_dump($ultimo);
+        
 				
 				for($j=1;$j<=($x-2)/2; $j++){
 					$n=$data[$j];

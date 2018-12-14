@@ -43,12 +43,12 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" >
+                <a class="nav-link" href="<?php echo base_url();?>index.php/Compras/add" >
                   <span data-feather="file"></span>
                   Compras
                 </a>
               </li><li class="nav-item">
-                <a class="nav-link" href="#" >
+                <a class="nav-link" href="<?php echo base_url();?>index.php/Becas/add" >
                   <span data-feather="file"></span>
                   Becas
                 </a>

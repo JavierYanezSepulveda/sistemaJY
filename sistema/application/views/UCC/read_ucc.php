@@ -15,7 +15,8 @@ $(document).ready(function(){
 
 	<div id="body">
 	<a href="<?php echo base_url();?>index.php/Ucc/add" class="btn btn-default">Añadir nueva unidad</a>
-		<table border="1" align="center">
+		<table id="grid" class="table table-striped table-bordered dt-responsive nowrap" border="1" align="center">
+			<thead>
 			<tr>
 				<th>ID</th>
 				<th>Numero_UCC</th>
@@ -23,9 +24,10 @@ $(document).ready(function(){
 				<th>Anexo</th>
 
 			</tr>
+			</thead>
 
 
-
+<tbody>
 <?php 
  // var_dump($UCC);
 	foreach ($UCC as $fila) {?>
@@ -43,6 +45,7 @@ $(document).ready(function(){
 <?php
 } 
 ?>
+</tbody>
 		</table>
 		
 	</div>	
