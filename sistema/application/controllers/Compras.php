@@ -37,7 +37,7 @@ class Compras extends CI_Controller {
 					$valores[] = $valor;
 				}
 
-		$x = count($data);
+		$x = count($data)-1;
 		$cantidad = 'cantidad';
 		$subtotal = 0;
 		$total= 0 ;

@@ -7,7 +7,7 @@
     <meta name="author" content="">
     
 
-    <title></title>
+
 
     <!-- Bootstrap core CSS -->
 

@@ -7,6 +7,7 @@
 					<tr>
 						<th>ID Compra</th>
 						<th>ID Usuario</th>
+						<th>RUT Proveedor</th>
 						<th>N° Factura</th>
 						<th>Fecha Compra</th>
 						<th>SubTotal</th>
@@ -24,6 +25,7 @@
 				<tr>
 					<td><?=	$fila['ID_COMPRA'];?></td>
 					<td><?= $fila['ID_USUARIO'];?></td>
+					<td><?= $fila['RUT_PROVEEDOR']?></td>
 					<td><?= $fila['N_FACTURA'];?></td>
 					<td><?= $fila['FECHA_INGRESO'];?></td>
 					<td><?= $fila['SUBTOTAL'];?></td>

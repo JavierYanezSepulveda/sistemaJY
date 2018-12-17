@@ -13,6 +13,11 @@
         <label for="FECHA_INGRESO">FECHA DE INGRESO</label><br>
         <input type="date" name="FECHA_INGRESO" value="<?php echo date("Y-m-d");?>" size="30" required/><br />
         <br>
+        <label>Tipo venta</label><br>
+        <label>Venta normal</label>
+        <input type="radio" name="myradio" value="0" <?php echo  set_radio('myradio', '0', TRUE); ?> /><br>
+        <label>TRANSBANK</label>
+        <input type="radio" name="myradio" value="1" <?php echo  set_radio('myradio', '1',TRUE); ?> /><br>
         <label for="Productos">Productos</label><br>
         <div id="seccionProductos"></div>
         <label>Total:</label>

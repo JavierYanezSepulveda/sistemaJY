@@ -13,6 +13,8 @@
         <input type="number" name="N_FACTURA" value="" min="0" max="9999999999" size="30" required/><br />
         <label for="FECHA_INGRESO">FECHA DE INGRESO</label><br>
         <input type="date" name="FECHA_INGRESO" value="<?php echo date("Y-m-d");?>" size="30" required/><br />
+        <label for="RUT_PROVEEDOR">RUT PROVEEDOR (Sin digito verificador)</label><br>
+        <input type="number" name="RUT_PROVEEDOR" value="" min="0" max="9999999999" size="30" required/><br />
         <br>
         <label for="Insumos">Insumos</label><br>
         <div id="seccionInsumos"></div>

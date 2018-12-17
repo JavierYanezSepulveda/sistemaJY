@@ -13,7 +13,8 @@ class Compras_model extends CI_Model {
       $id_u = $this->session->userdata('RUT');
       $N_FACTURA = $this->input->post('N_FACTURA', true);
       $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
-      $data = "INSERT INTO COMPRA (ID_Compra,ID_Usuario,N_Factura, Fecha_ingreso, ID_UCC,Subtotal,IVA,Total, Observacion,ID_Sucursal, ESTADO)values (compra_seq.nextval, '$id_u', '$N_FACTURA', TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, '$subtotal',null,'$total', null, '$id_s', 1)";
+      $RUT_PROVEEDOR = $this->input->post('RUT_PROVEEDOR', true);
+      $data = "INSERT INTO COMPRA (ID_Compra,ID_Usuario,N_Factura, Fecha_ingreso, ID_UCC,Subtotal,IVA,Total, RUT_PROVEEDOR,ID_Sucursal, ESTADO)values (compra_seq.nextval, '$id_u', '$N_FACTURA', TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, '$subtotal',null,'$total', '$RUT_PROVEEDOR', '$id_s', 1)";
       $result = $this->db->query($data);
         
   	}
