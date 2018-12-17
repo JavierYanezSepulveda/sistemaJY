@@ -11,9 +11,8 @@
 						<th>Fecha Compra</th>
 						<th>SubTotal</th>
 						<th>Total c/IVA</th>
+						<th>Estado</th>
 						<th>Detalle</th>
-						<th>Editar</th>
-						<th>Eliminar</th>
 					</tr>
 				</thead>
 			<tbody>
@@ -29,9 +28,13 @@
 					<td><?= $fila['FECHA_INGRESO'];?></td>
 					<td><?= $fila['SUBTOTAL'];?></td>
 					<td><?= $fila['TOTAL'];?></td>
+					<?php if ($fila['ESTADO'] === '1'|| $fila['ESTADO'] === null):?>
+          <td><a href="<?php echo base_url();?>index.php/Compras/desactivar/<?=$fila['ID_COMPRA'];?>">Activo</a></td> 
+      <?php elseif($fila['ESTADO'] === '0' ) :?>
+          <td><a href="<?php echo base_url();?>index.php/Compras/activar/<?=$fila['ID_COMPRA'];?>">Inactivo</a></td> 
+      <?php endif;?>
 					<td><a href="<?php echo base_url();?>index.php/Compras/detalle_compra/<?=$fila['ID_COMPRA'];?>">Detalle</a></td>
-					<td><a href="<?php echo base_url();?>index.php/Compras/editar/<?=$fila['ID_COMPRA'];?>">Editar</a></td>
-					<td><a class="delete" href="<?php echo base_url();?>index.php/Compras/delete/<?=$fila['ID_COMPRA'];?> ">Eliminar</a></td>
+					
 		
 				</tr>
 			

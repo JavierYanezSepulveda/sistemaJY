@@ -104,9 +104,21 @@ class Ventas_model extends CI_Model {
       $this->db->select('*');
       $this->db->from('ITEMS_VENTA');
       $this->db->where('ID_VENTA', $id);
+      $this->db->join('PRODUCTO', 'PRODUCTO.ID_PRODUCTO = ITEMS_VENTA.ID_PRODUCTO');
       $result = $this->db->get();
       return  $result->result_array();
 
+    }
+
+     public function desactivar($id){
+      $this->db->where('ID_VENTA', $id);
+      $this->db->set('ESTADO', 0);
+      return $this->db->update('VENTA');
+    }
+    public function activar($id){
+      $this->db->where('ID_VENTA', $id);
+      $this->db->set('ESTADO', 1);
+      return $this->db->update('VENTA');
     }
  }
 ?>

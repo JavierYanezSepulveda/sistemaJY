@@ -13,7 +13,7 @@ class Insumos_model extends CI_Model {
       $this->db->select('*');
       $this->db->from('INSUMO');
       $this->db->where('ID_SUCURSAL', $ID_SUCURSAL);
-      $this->db->join('PROVEEDOR', 'PROVEEDOR.ID_PROVEEDOR = INSUMO.ID_PROVEEDOR');
+      $this->db->join('PROVEEDOR', 'PROVEEDOR.RUT_PROVEEDOR = INSUMO.ID_PROVEEDOR');
       $this->db->order_by('ID_INSUMO', 'asc');
       $result = $this->db->get();
       return  $result->result_array();
@@ -38,9 +38,9 @@ class Insumos_model extends CI_Model {
         $PRECIO_C = $this->input->post('PRECIO_C', true);
         $MARCA = $this->input->post('MARCA', true);
         $STOCK = $this->input->post('STOCK', true);
-        $ID_PROVEEDOR = $this->input->post('selectProveedores', true);
+        $RUT_PROVEEDOR = $this->input->post('selectProveedores', true);
         $ID_SUCURSAL = $this->session->userdata('ID_SUCURSAL');
-        $data = "INSERT INTO INSUMO(ID_INSUMO, NOMBRE_I, PRECIO_C, MARCA, STOCK, ID_PROVEEDOR, ID_SUCURSAL) values (insumo_seq.nextval, '$NOMBRE_I', '$PRECIO_C', '$MARCA', '$STOCK', '$ID_PROVEEDOR', '$ID_SUCURSAL')";
+        $data = "INSERT INTO INSUMO(ID_INSUMO, NOMBRE_I, PRECIO_C, MARCA, STOCK, RUT_PROVEEDOR, ID_SUCURSAL) values (insumo_seq.nextval, '$NOMBRE_I', '$PRECIO_C', '$MARCA', '$STOCK', '$RUT_PROVEEDOR', '$ID_SUCURSAL')";
         $result = $this->db->query($data);
         return $result;
   	}
@@ -54,10 +54,10 @@ class Insumos_model extends CI_Model {
         return FALSE;
        }
     }
-    public function obtener_proveedor($ID_PROVEEDOR){
+    public function obtener_proveedor($RUT_PROVEEDOR){
       $this->db->select('*');
       $this->db->from('PROVEEDOR');
-      $this->db->where('ID_PROVEEDOR', $ID_PROVEEDOR);
+      $this->db->where('RUT_PROVEEDOR', $RUT_PROVEEDOR);
       $proveedor=$this->db->get();
       return $proveedor->result_array();
     }

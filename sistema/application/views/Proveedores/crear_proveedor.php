@@ -4,7 +4,8 @@
 
     
 <form id="form" name="form" action="<?=base_url()?>index.php/Proveedores/addProveedor" method="POST">
-      
+       <label for="RUT_PROVEEDOR">RUT Proveedor</label>
+       <input type="input" name="RUT_PROVEEDOR" value="" required /><br />
        <label for="NOMBRE_P">Nombre</label>
        <input type="input" name="NOMBRE_P" value="" required /><br />
        <label for="TELEFONO">Teléfono</label>

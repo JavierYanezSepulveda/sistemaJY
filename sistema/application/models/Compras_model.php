@@ -13,7 +13,7 @@ class Compras_model extends CI_Model {
       $id_u = $this->session->userdata('RUT');
       $N_FACTURA = $this->input->post('N_FACTURA', true);
       $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
-      $data = "INSERT INTO COMPRA (ID_Compra,ID_Usuario,N_Factura, Fecha_ingreso, ID_UCC,Subtotal,IVA,Total, Observacion,ID_Sucursal)values (compra_seq.nextval, '$id_u', '$N_FACTURA', TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, '$subtotal',null,'$total', null, '$id_s')";
+      $data = "INSERT INTO COMPRA (ID_Compra,ID_Usuario,N_Factura, Fecha_ingreso, ID_UCC,Subtotal,IVA,Total, Observacion,ID_Sucursal, ESTADO)values (compra_seq.nextval, '$id_u', '$N_FACTURA', TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, '$subtotal',null,'$total', null, '$id_s', 1)";
       $result = $this->db->query($data);
         
   	}
@@ -63,9 +63,21 @@ class Compras_model extends CI_Model {
       $this->db->select('*');
       $this->db->from('ITEMS_COMPRA');
       $this->db->where('ID_COMPRA', $id);
+      $this->db->join('INSUMO', 'INSUMO.ID_INSUMO = ITEMS_COMPRA.ID_INSUMO');
       $result = $this->db->get();
       return  $result->result_array();
+      
+    }
 
+    public function desactivar($id){
+      $this->db->where('ID_COMPRA', $id);
+      $this->db->set('ESTADO', 0);
+      return $this->db->update('COMPRA');
+    }
+    public function activar($id){
+      $this->db->where('ID_COMPRA', $id);
+      $this->db->set('ESTADO', 1);
+      return $this->db->update('COMPRA');
     }
  }
 ?>

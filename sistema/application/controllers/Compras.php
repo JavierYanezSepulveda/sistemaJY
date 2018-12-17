@@ -98,7 +98,21 @@ class Compras extends CI_Controller {
 		$this->load->view('footer');
 
 	}
+	public function desactivar(){
 
+		$this->load->helper('url');
+        $id = $this->uri->segment(3);
+        $this->Compras_model->desactivar($id);
+        redirect('Compras/lista_compras', 'refresh');
+	}
+
+	public function activar(){
+
+		$this->load->helper('url');
+        $id = $this->uri->segment(3);
+        $this->Compras_model->activar($id);
+        redirect('Compras/lista_compras', 'refresh');
+	}
 	
 	
 }

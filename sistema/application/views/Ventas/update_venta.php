@@ -20,12 +20,12 @@
         <?php foreach ($proveedor as $f) {?>
     
 
-        <option type="input" value="<?php echo $f["ID_PROVEEDOR"] ?>"><?php echo $f["NOMBRE_P"]?> </option>  
+        <option type="input" value="<?php echo $f["RUT_PROVEEDOR"] ?>"><?php echo $f["NOMBRE_P"]?> </option>  
         <?php
         }
         ?>
        <?php foreach ($proveedores as $k => $v): ?>
-        <option type="input" value="<?php echo $v["ID_PROVEEDOR"] ?>"><?php echo $v["NOMBRE_P"] ?></option>
+        <option type="input" value="<?php echo $v["RUT_PROVEEDOR"] ?>"><?php echo $v["NOMBRE_P"] ?></option>
         <?php endforeach ?>
 
 </select>

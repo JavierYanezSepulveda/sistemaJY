@@ -10,9 +10,8 @@
 						<th>N° Boleta</th>
 						<th>Fecha Venta</th>
 						<th>Total</th>
+						<th>Estado</th>
 						<th>Detalle</th>
-						<th>Editar</th>
-						<th>Eliminar</th>
 					</tr>
 				</thead>
 <tbody>
@@ -27,9 +26,14 @@
 					<td><?= $fila['N_BOLETA'];?></td>
 					<td><?= $fila['FECHA_INGRESO'];?></td>
 					<td><?= $fila['TOTAL'];?></td>
+					<?php if ($fila['ESTADO'] === '1'|| $fila['ESTADO'] === null):?>
+          <td><a href="<?php echo base_url();?>index.php/Ventas/desactivar/<?=$fila['ID_VENTA'];?>">Activo</a></td> 
+      <?php elseif($fila['ESTADO'] === '0' ) :?>
+          <td><a href="<?php echo base_url();?>index.php/Ventas/activar/<?=$fila['ID_VENTA'];?>">Inactivo</a></td> 
+      <?php endif;?>
 					<td><a href="<?php echo base_url();?>index.php/Ventas/detalle_venta/<?=$fila['ID_VENTA'];?>">Detalle</a></td>
-					<td><a href="<?php echo base_url();?>index.php/Ventas/editar/<?=$fila['ID_VENTA'];?>">Editar</a></td>
-					<td><a class="delete" href="<?php echo base_url();?>index.php/Ventas/delete/<?=$fila['ID_VENTA'];?> ">Eliminar</a>	</td>	
+					
+					
 		
 				</tr>
 	<?php

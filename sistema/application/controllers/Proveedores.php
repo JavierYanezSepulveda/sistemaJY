@@ -30,11 +30,8 @@ class Proveedores extends CI_Controller {
 	}
 	public function addProveedor(){
 		$this->Proveedores_model->add();
-		$this->load->view('header');
-		$this->load->view('menu_lateral');
-		$data['Proveedores'] = $this->Proveedores_model->obtener_todos();
-		$this->load->view('Proveedores/read_proveedores', $data);
-		$this->load->view('footer');
+		echo "<script>alert('¡Proveedor agregado!.');</script>";
+        redirect('Proveedores/index', 'refresh');
 	}
 
 	public function delete($id){
@@ -45,11 +42,8 @@ class Proveedores extends CI_Controller {
           $item=$this->Proveedores_model->delete($id);
           
          
-		$this->load->view('header');
-		$this->load->view('menu_lateral');
-		$data['Proveedores'] = $this->Proveedores_model->obtener_todos();
-		$this->load->view('Proveedores/read_proveedores', $data);
-		$this->load->view('footer');
+		echo "<script>alert('¡Proveedor eliminado!.');</script>";
+        redirect('Proveedores/index', 'refresh');
 	}
 
 	public function editar($id){
@@ -57,12 +51,13 @@ class Proveedores extends CI_Controller {
 		$obtenerProveedor = $this->Proveedores_model->obtener_proveedor($id);
 		if($obtenerProveedor != FALSE){
 			foreach($obtenerProveedor->result() as $row){
+				$RUT_PROVEEDOR = $row->RUT_PROVEEDOR;
 				$NOMBRE_P = $row->NOMBRE_P;
 				$TELEFONO = $row->TELEFONO;
 				$DIRECCION = $row->DIRECCION;
 			}
 			$data = array(
-							'id' => $id, 
+							'RUT_PROVEEDOR' => $RUT_PROVEEDOR, 
 							'NOMBRE_P' => $NOMBRE_P,
 							'TELEFONO' => $TELEFONO,
 							'DIRECCION' => $DIRECCION
@@ -86,12 +81,9 @@ class Proveedores extends CI_Controller {
 						
 		);
 
-		$this->Proveedores_model->editar_proveedor($id, $data);	
-		$this->load->view('header');
-		$this->load->view('menu_lateral');
-		$data['Proveedores'] = $this->Proveedores_model->obtener_todos();
-		$this->load->view('Proveedores/read_proveedores', $data);
-		$this->load->view('footer');
+		$this->Proveedores_model->editar_proveedor($RUT_PROVEEDOR, $data);	
+		echo "<script>alert('¡Proveedor modificado!.');</script>";
+        redirect('Proveedores/index', 'refresh');
 
 
 	}

@@ -20,7 +20,7 @@
        <label> Proveedores </label>
        <select style=" width: 40%" name="selectProveedores">
        <?php foreach ($proveedores as $k => $v): ?>
-        <option type="input" value="<?php echo $v["ID_PROVEEDOR"] ?>" required><?php echo $v["NOMBRE_P"] ?></option>
+        <option type="input" value="<?php echo $v["RUT_PROVEEDOR"] ?>" required><?php echo $v["NOMBRE_P"] ?></option>
         <?php endforeach ?>
 
 </select>

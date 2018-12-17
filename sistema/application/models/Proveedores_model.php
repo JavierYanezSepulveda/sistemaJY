@@ -16,11 +16,12 @@ class Proveedores_model extends CI_Model {
 	    return  $result->result_array();
   	}
   	public function add(){
-  	
+  	     
+        $RUT_PROVEEDOR = $this->input->post('RUT_PROVEEDOR'); 
         $NOMBRE_P = $this->input->post('NOMBRE_P');
          $TELEFONO = $this->input->post('TELEFONO');
          $DIRECCION = $this->input->post('DIRECCION');
-        $data = "INSERT INTO PROVEEDOR(ID_PROVEEDOR, NOMBRE_P, TELEFONO, DIRECCION) values(proveedor_seq.nextval, '$NOMBRE_P', '$TELEFONO', '$DIRECCION')";
+        $data = "INSERT INTO PROVEEDOR(RUT_PROVEEDOR, NOMBRE_P, TELEFONO, DIRECCION) values('$RUT_PROVEEDOR', '$NOMBRE_P', '$TELEFONO', '$DIRECCION')";
         $result = $this->db->query($data); 
     
     return $result;
@@ -28,14 +29,14 @@ class Proveedores_model extends CI_Model {
 
   	
   	public function delete($id){
-  		$this->db->where('ID_PROVEEDOR', $id);
+  		$this->db->where('RUT_PROVEEDOR', $id);
       return $this->db->delete('PROVEEDOR');
 
 
 
   	}
     public function obtener_proveedor($id){
-      $this->db->where('ID_PROVEEDOR', $id);
+      $this->db->where('RUT_PROVEEDOR', $id);
         $query = $this->db->get('PROVEEDOR');
         if ($query->num_rows() > 0){
         return $query;
@@ -45,7 +46,7 @@ class Proveedores_model extends CI_Model {
     }
     
     public function editar_proveedor($id, $data){
-        $this->db->where('ID_PROVEEDOR', $id);
+        $this->db->where('RUT_PROVEEDOR', $id);
         $this->db->update('PROVEEDOR', $data);
 
     }

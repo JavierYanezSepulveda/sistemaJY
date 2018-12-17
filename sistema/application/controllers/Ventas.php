@@ -92,6 +92,22 @@ class Ventas extends CI_Controller {
 
 	}
 
+	public function desactivar(){
+
+		$this->load->helper('url');
+        $id = $this->uri->segment(3);
+        $this->Ventas_model->desactivar($id);
+        redirect('Ventas/lista_ventas', 'refresh');
+	}
+
+	public function activar(){
+
+		$this->load->helper('url');
+        $id = $this->uri->segment(3);
+        $this->Ventas_model->activar($id);
+        redirect('Ventas/lista_ventas', 'refresh');
+	}
+
 	
 	
 }

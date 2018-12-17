@@ -20,8 +20,8 @@
     <div class="container-fluid"  >
 
       <div class="row" >
-        <nav class="sidebar">
-          <div class="sidebar-sticky" style="margin-right: 89%">
+        <nav class="sidebar" >
+          <div class="sidebar-sticky" style="margin-right: 89%; margin-top: 1.2%; margin-bottom: 10%">
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a class="nav-link active" href="<?php echo base_url();?>index.php/Welcome/inicio" >
@@ -95,8 +95,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="#" >
                   <span data-feather="settings"></span>
-                  Configuraciones
+                  Config
                 </a>
+                <br><br>
+
               </li>
             </ul>
 
@@ -108,14 +110,7 @@
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-   <!--  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script> -->
-    <!-- <script src="../../assets/js/popper.min.js"></script> -->
-    <!-- <script src="../../assets/js/bootstrap.min.js"></script> -->
-
+    
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script>

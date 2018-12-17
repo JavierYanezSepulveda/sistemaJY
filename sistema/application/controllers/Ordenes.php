@@ -96,6 +96,23 @@ class Ordenes extends CI_Controller {
 
 	}
 
+	public function desactivar(){
+
+		$this->load->helper('url');
+        $id = $this->uri->segment(3);
+        $this->Ventas_model->desactivar($id);
+        redirect('Ordenes/lista_ordenes', 'refresh');
+	}
+
+	public function activar(){
+
+		$this->load->helper('url');
+        $id = $this->uri->segment(3);
+        $this->Ventas_model->activar($id);
+        redirect('Ordenes/lista_ordenes', 'refresh');
+	}
+
+
 	
 	
 }
