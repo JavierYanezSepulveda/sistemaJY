@@ -22,9 +22,7 @@ class Insumos extends CI_Controller {
 	public function add(){
 		
         $proveedores = $this->Insumos_model->obtener_proveedores();
-		$sucursales = $this->Insumos_model->obtener_sucursales();
-		$data = array("proveedores" => $proveedores,
-						"sucursales" => $sucursales);
+		$data = array("proveedores" => $proveedores);
 
         $this->load->view('header');
 		$this->load->view('menu_lateral');
@@ -35,22 +33,16 @@ class Insumos extends CI_Controller {
 	}
 	public function addInsumo(){
 		$this->Insumos_model->add();
-		$this->load->view('header');
-		$this->load->view('menu_lateral');
-		$data['Insumos'] = $this->Insumos_model->obtener_todos();
-		$this->load->view('Insumos/read_insumos', $data);
-		$this->load->view('footer');
+		echo "<script>alert('¡Insumo agregado!');</script>";
+        redirect('Insumos/index', 'refresh');
 	}
 
 	public function delete($id){
 		$this->load->helper('url');
         $id = $this->uri->segment(3);
-        $item = $this->Insumos_model->delete($id);
-        $this->load->view('header');
-		$this->load->view('menu_lateral');
-		$data['Insumos'] = $this->Insumos_model->obtener_todos();
-		$this->load->view('Insumos/read_insumos', $data);
-		$this->load->view('footer');
+        $this->Insumos_model->delete($id);
+        echo "<script>alert('¡Insumo eliminado!');</script>";
+        redirect('Insumos/index', 'refresh');
 	}
 	public function editar($id){
 		$id = $this->uri->segment(3);
@@ -62,7 +54,6 @@ class Insumos extends CI_Controller {
 				$PRECIO_C = $row->PRECIO_C;
 				$STOCK = $row->STOCK;
 				$ID_PROVEEDOR = $row->ID_PROVEEDOR;
-				$ID_SUCURSAL = $row->ID_SUCURSAL;
 			}
 			$data = array(
 							'id' => $id, 
@@ -70,18 +61,13 @@ class Insumos extends CI_Controller {
 							'PRECIO_C' => $PRECIO_C,
 							'MARCA' => $MARCA,
 							'STOCK' => $STOCK,
-							'ID_PROVEEDOR' => $ID_PROVEEDOR,
-							'ID_SUCURSAL' => $ID_SUCURSAL
-
+							'ID_PROVEEDOR' => $ID_PROVEEDOR
+							
 						);
 			$proveedores = $this->Insumos_model->obtener_proveedores();
-			$sucursales = $this->Insumos_model->obtener_sucursales();
 			$data['proveedores'] = $proveedores;
-			$data['sucursales'] = $sucursales;
 			$proveedor = $this->Insumos_model->obtener_proveedor($ID_PROVEEDOR);
-			$sucursal = $this->Insumos_model->obtener_sucursal($ID_SUCURSAL);
 			$data['proveedor'] = $proveedor;
-			$data['sucursal'] = $sucursal;
 		}else{
 			return FALSE;
 		}
@@ -98,18 +84,14 @@ class Insumos extends CI_Controller {
 						'MARCA' => $this->input->post('MARCA', true),
 						'STOCK' => $this->input->post('STOCK', true),
 						'ID_PROVEEDOR' => $this->input->post('selectProveedores', true),
-						'ID_SUCURSAL' => $this->input->post('selectSucursales', true),
+						'ID_SUCURSAL' => $this->session->userdata('ID_SUCURSAL')
 
 		);
 
 		$this->Insumos_model->editar_insumo($id, $data);	
 		
-		$this->load->view('header');
-		$this->load->view('menu_lateral');
-		$data['Insumos'] = $this->Insumos_model->obtener_todos();
-		
-		$this->load->view('Insumos/read_insumos', $data);
-		$this->load->view('footer');
+		echo "<script>alert('¡Insumo actualizado!');</script>";
+        redirect('Insumos/index', 'refresh');
 	}
 	
 }

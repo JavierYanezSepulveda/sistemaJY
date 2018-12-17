@@ -100,35 +100,7 @@ class Ucc extends CI_Controller {
 		$this->load->view('footer');
     
     }
-
-
-		
-
-
-
-		 // public function add(){
-         
-   //      //compruebo si se a enviado submit
-   //      if($this->input->post("submit")){
-         
-   //      //llamo al metodo add
-   //      $add=$this->usuarios_model->add(
-   //              $this->input->post("email"),
-   //              $this->input->post("password"),
-   //              $this->input->post("nombre"),
-   //              $this->input->post("apellido")
-   //              );
-   //      }
-   //      if($add==true){
-   //          //Sesion de una sola ejecución
-   //          $this->session->set_flashdata('correcto', 'Usuario añadido correctamente');
-   //      }else{
-   //          $this->session->set_flashdata('incorrecto', 'Usuario añadido correctamente');
-   //      }
-         
-   //      //redirecciono la pagina a la url por defecto
-   //      redirect(base_url());
-   //  }
+    
 
 	}
 }

@@ -48,7 +48,6 @@ class Compras extends CI_Controller {
 					$m=$data[$cantidad.$j]; //cantidad vendida
 					$precio = $this->Compras_model->total($n);
 					$precio2= $precio[0];
-					// print_r($precio[0]);
 					$precio_total = $precio2['PRECIO_C']*$m;
 					$subtotal=$subtotal+$precio_total;
 					$total=$subtotal*$IVA; 

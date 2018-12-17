@@ -5,7 +5,7 @@
   
     
 <form id="form" name="form" action="<?=base_url()?>index.php/Insumos/editarInsumo/<?=$id?>" method="POST">
-      
+      <input type="button" class="btn btn-default" style="margin-left: 70%" value="volver" name="volver" onclick="history.back()" /><br>
        <label for="NOMBRE_I">Nombre</label>
        <input type="input" name="NOMBRE_I" value="<?=$NOMBRE_I?>" required/><br />
        <label for="PRECIO_C">Precio de compra</label>
@@ -30,21 +30,9 @@
 
 </select>
 <br>
-<label> Sucursal </label>
-<select style="display: block;" name="selectSucursales" >
-   <?php foreach ($sucursal as $g) {?>
-    
 
-        <option type="input" value="<?php echo $g["ID_SUCURSAL"] ?>"><?php echo $g["NOMBRE_S"]?> </option>  
-        <?php
-        }
-        ?>
-  <?php foreach ($sucursales as $p => $q): ?>
-    <option type="input"  value="<?php echo $q["ID_SUCURSAL"] ?>"><?php echo $q["NOMBRE_S"] ?></option>
-  <?php endforeach ?>
-</select> 
        
-       <input type="submit" name="editar" value="Modificar" />
+       <input type="submit" name="editar" class="btn btn-default" value="Modificar" />
 </form>
  
   </div>

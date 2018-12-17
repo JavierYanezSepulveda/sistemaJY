@@ -68,8 +68,8 @@ class Proveedores extends CI_Controller {
 							'DIRECCION' => $DIRECCION
 
 						);
-	}else{
-			return FALSE;
+		}else{
+				return FALSE;
 		}
 		$this->load->view('header');
 		$this->load->view('menu_lateral');

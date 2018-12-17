@@ -48,6 +48,17 @@
     <!-- Icons -->
       <script src="<?php echo base_url();?>/assets/js/feather.min.js"></script>
       <script src="<?php echo base_url();?>/assets/js/Chart.min.js"></script>
+      <script language="JavaScript" type="text/javascript">
+$(document).ready(function(){
+    $("a.delete").click(function(e){
+        if(!confirm('¿Está seguro que desea eliminar este elemento?')){
+            e.preventDefault();
+            return false;
+        }
+        return true;
+    });
+});
+</script>
       <script language="JavaScript">
           function confirmar ( mensaje ) {
             return confirm( mensaje );

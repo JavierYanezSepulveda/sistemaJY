@@ -19,12 +19,12 @@
         <div id="total"></div>
         <div id="jsAux"></div>
         <body onload="clickButton()">
-        <input type="button" name="editar" id="addItem" value="+ Agregar producto" class="btn btn-default " />
+        <input type="button" name="editar" id="addItem" value="+ Agregar producto" class="btn btn-default" style="margin-left: 70%" />
         <br>
         <br>
-        <label>Finalizar venta</label>
+        <label style="margin-left: 70%">Finalizar venta</label>
         <br>
-        <input type="submit" value="Finalizar venta" class="btn btn-default" "/>
+        <input type="submit" value="Finalizar venta" class="btn btn-default" style="margin-left: 70%; display: block;"/>
       </form>
  
   </div>

@@ -1,28 +1,18 @@
-<head><script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script language="JavaScript" type="text/javascript">
-$(document).ready(function(){
-    $("a.delete").click(function(e){
-        if(!confirm('¿Está seguro que desea eliminar este elemento?')){
-            e.preventDefault();
-            return false;
-        }
-        return true;
-    });
-});
-</script></head>
-<div class="container" style="margin-left: 13%">
+<div id="someDiv" class="container" style="margin-left: 13%">
 	<h1>Proveedores</h1>
 	
-	<div id="body">
+	<body>
 	<a href="<?php echo base_url();?>index.php/Proveedores/add" class="btn btn-default">Añadir nuevo proveedor</a>
 		<table id="grid" class="table table-striped table-bordered dt-responsive nowrap" border="1" align="center">
 			<thead>
-			<tr>
-				<th>ID</th>
-				<th>Nombre</th>
-				<th>Teléfono</th>
-				<th>Dirección</th>
-			</tr>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Teléfono</th>
+					<th>Dirección</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+				</tr>
 			</thead>
 <tbody>
 <?php 
@@ -46,5 +36,5 @@ $(document).ready(function(){
 </tbody>
 		</table>
 		
-	</div>	
+	</body>	
 </div>

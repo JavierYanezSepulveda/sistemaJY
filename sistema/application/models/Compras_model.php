@@ -37,34 +37,6 @@ class Compras_model extends CI_Model {
 
     
     
-    // public function obtener_productos($ID_SUCURSAL){
-      
-    //   $this->db->select('*');
-    //   $this->db->from('PRODUCTO');
-    //   $this->db->where('ID_SUCURSAL', $ID_SUCURSAL);
-    //   $proveedor=$this->db->get();
-    //   return $proveedor->result_array();
-    // }
-    
-    // public function insumo($id_producto){
-      
-    //   $this->load->database('SCA');
-    //   $this->db->select('ID_INSUMO');
-    //   $this->db->from('PRODUCTO');
-    //   $this->db->where('ID_PRODUCTO', $id_producto);
-    //   $result = $this->db->get();
-    //   return  $result->result_array();
-    // }
-
-    // public function stock($insumo){
-      
-    //   $this->load->database('SCA');
-    //   $this->db->select('STOCK');
-    //   $this->db->from('INSUMO');
-    //   $this->db->where('ID_INSUMO', $insumo);
-    //   $result = $this->db->get();
-    //   return $result->result_array();
-    // }
 
     public function sumar($insumo, $cantidad_total){
       

@@ -8,7 +8,7 @@ class Becas extends CI_Controller {
 		$this->load->helper("url");
 		$this->load->model("Ordenes_model");
 		$this->load->model("Ventas_model");
-		$this->load->model("Ucc_model");
+		$this->load->model("Becas_model");
 		$this->load->model("Compras_model");
 		$this->load->model("Insumos_model");
 		$this->load->library("session");
@@ -24,77 +24,28 @@ class Becas extends CI_Controller {
 		
 	
 	}
-	public function addCompra(){
-		$data = $_POST;
+	public function addBeca(){
+			
+		$CANTIDAD= $this->input->post('CANTIDAD', true);
+		$this->Becas_model->add_beca();
+		$stock_1 = $this->Ventas_model->stock(145);
+		$stock = $stock_1[0]['STOCK'];
+		$cantidad_total= $stock - $CANTIDAD;
+		$this->Ordenes_model->descontar(145, $cantidad_total);
 		
-				foreach($data as $fila => $valor) {
-					$filas[] = $fila;
-					$valores[] = $valor;
-				}
-
-		$x = count($data);
-		$cantidad = 'cantidad';
-		$subtotal = 0;
-		$total= 0 ;
-		$IVA = 1.19;
-				
-				for($j=1;$j<=($x-2)/2; $j++){
-					$n=$data[$j]; //id_producto
-					$m=$data[$cantidad.$j]; //cantidad vendida
-					$precio = $this->Compras_model->total($n);
-					$precio2= $precio[0];
-					// print_r($precio[0]);
-					$precio_total = $precio2['PRECIO_C']*$m;
-					$subtotal=$subtotal+$precio_total;
-					$total=$subtotal*$IVA; 
-				
-
-				}
-
-
-		$this->Compras_model->add_compra($subtotal,$total);
-		$ultimo_id_orden = $this->db->select('ID_COMPRA')->from('COMPRA')->order_by('ID_COMPRA',"desc")->limit(1)->get()->row(); 
-        $ultimo_id_orden = (array) $ultimo_id_orden;
-        $ultimo=$ultimo_id_orden['ID_COMPRA'];
-
-       
-				
-				for($j=1;$j<=($x-2)/2; $j++){
-					$n=$data[$j];
-					$m=$data[$cantidad.$j];
-					$this->Compras_model->add_compra_producto($n,$m,$ultimo);
-					$stock_1 = $this->Ventas_model->stock($n);
-					$stock = $stock_1[0]['STOCK'];
-					$cantidad_total= $stock + $m;
-			  		$this->Compras_model->sumar($n, $cantidad_total);
-								
-				}		
-		
-		echo "<script>alert('¡Compra realizada!.');</script>";
- 		redirect('Compras/add', 'refresh');
+		echo "<script>alert('¡Beca ingresada!.');</script>";
+ 		redirect('Becas/add', 'refresh');
 	}
 
-	public function lista_compras(){
-		$data['Compras'] = $this->Compras_model->obtener_compras();
+	public function lista_becas(){
+		$data['Becas'] = $this->Becas_model->obtener_becas();
 		$this->load->view('header');
 		$this->load->view('menu_lateral');
-		$this->load->view('Compras/read_compras',$data);
+		$this->load->view('Becas/read_becas',$data);
 		$this->load->view('footer');
 
 
 	}
 
-	public function detalle_compra($id){
-		$this->load->helper('url');
-        $id = $this->uri->segment(3);
-        $data['Detalle'] = $this->Compras_model->detalle_compra($id);
-        $this->load->view('header');
-		$this->load->view('menu_lateral');
-		$this->load->view('Compras/read_compra_detalle',$data);
-		$this->load->view('footer');
-
-	}
-
-	
-	
+		
 }

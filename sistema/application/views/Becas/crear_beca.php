@@ -1,9 +1,4 @@
-<script>        
-         var cantidad = 1;   //inicializa variables globales del script usado más adelante
-         var insumo = 1;
-         var IVA = 1.19;
-</script>
-    
+
 <body>     
   <div class="container" style="margin-left: 13%">
     <h2>Ingreso de becas</h2>

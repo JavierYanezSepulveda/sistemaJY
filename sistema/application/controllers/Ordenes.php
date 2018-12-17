@@ -45,7 +45,6 @@ class Ordenes extends CI_Controller {
 					$m=$data[$cantidad.$j]; //cantidad vendida
 					$precio = $this->Ventas_model->total($n);
 					$precio2= $precio[0];
-					// print_r($precio[0]);
 					$precio_total = $precio2['PRECIO_V']*$m;
 					$total=$total+$precio_total; 
 				

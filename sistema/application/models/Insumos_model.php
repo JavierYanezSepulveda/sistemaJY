@@ -8,14 +8,14 @@ class Insumos_model extends CI_Model {
   	}
 
     public function obtener_todos(){
-
+      $ID_SUCURSAL = $this->session->userdata('ID_SUCURSAL');
       $this->load->database('SCA');
       $this->db->select('*');
       $this->db->from('INSUMO');
+      $this->db->where('ID_SUCURSAL', $ID_SUCURSAL);
       $this->db->join('PROVEEDOR', 'PROVEEDOR.ID_PROVEEDOR = INSUMO.ID_PROVEEDOR');
       $this->db->order_by('ID_INSUMO', 'asc');
       $result = $this->db->get();
-        // $query = $this->db->get('INSUMO');
       return  $result->result_array();
 
     }
@@ -27,20 +27,10 @@ class Insumos_model extends CI_Model {
       $this->db->from('PROVEEDOR');
       $this->db->order_by('NOMBRE_P', 'asc');
       $result = $this->db->get();
-        // $query = $this->db->get('INSUMO');
       return  $result->result_array();
 
     }
-    public function obtener_sucursales(){
-
-      $this->load->database('SCA');
-      $this->db->select('*');
-      $this->db->from('SUCURSAL');
-      $this->db->order_by('NOMBRE_S', 'asc');
-      $result = $this->db->get();
-      return  $result->result_array();
-
-    }
+    
     
   	public function add(){
   	
@@ -49,9 +39,7 @@ class Insumos_model extends CI_Model {
         $MARCA = $this->input->post('MARCA', true);
         $STOCK = $this->input->post('STOCK', true);
         $ID_PROVEEDOR = $this->input->post('selectProveedores', true);
-        $ID_SUCURSAL = $this->input->post('selectSucursales', true);
-        // $ID_PROVEEDOR = $_POST['selectProveedores'];
-        // $ID_SUCURSAL =$_POST['selectSucursales'];
+        $ID_SUCURSAL = $this->session->userdata('ID_SUCURSAL');
         $data = "INSERT INTO INSUMO(ID_INSUMO, NOMBRE_I, PRECIO_C, MARCA, STOCK, ID_PROVEEDOR, ID_SUCURSAL) values (insumo_seq.nextval, '$NOMBRE_I', '$PRECIO_C', '$MARCA', '$STOCK', '$ID_PROVEEDOR', '$ID_SUCURSAL')";
         $result = $this->db->query($data);
         return $result;
@@ -73,13 +61,7 @@ class Insumos_model extends CI_Model {
       $proveedor=$this->db->get();
       return $proveedor->result_array();
     }
-    public function obtener_sucursal($ID_SUCURSAL){
-      $this->db->select('*');
-      $this->db->from('SUCURSAL');
-      $this->db->where('ID_SUCURSAL', $ID_SUCURSAL);
-      $sucursal=$this->db->get();
-      return $sucursal->result_array();
-  	}
+    
     public function editar_insumo($id, $data){
         $this->db->where('ID_INSUMO', $id);
         $this->db->update('INSUMO', $data);

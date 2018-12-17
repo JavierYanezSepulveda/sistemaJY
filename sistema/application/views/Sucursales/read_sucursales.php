@@ -1,16 +1,5 @@
-<head><script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script language="JavaScript" type="text/javascript">
-$(document).ready(function(){
-    $("a.delete").click(function(e){
-        if(!confirm('¿Está seguro que desea eliminar este elemento?')){
-            e.preventDefault();
-            return false;
-        }
-        return true;
-    });
-});
-</script></head>
-<div class="container" style="margin-left: 13%">
+
+<div class="container" style="margin-left: 13% ">
 	<h1>Sucurasales</h1>
 	
 	<div id="body">
@@ -21,6 +10,8 @@ $(document).ready(function(){
 				<th>ID</th>
 				<th>Nombre</th>
 				<th>Ciudad</th>
+				<th>Editar</th>
+				<th>Eliminar</th>
 			</tr>
 			</thead>
 <tbody>

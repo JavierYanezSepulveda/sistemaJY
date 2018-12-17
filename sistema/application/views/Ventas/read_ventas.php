@@ -1,19 +1,3 @@
-<head>
-	<script language="JavaScript" type="text/javascript">
-		$(document).ready(function(){
-    		$("a.delete").click(function(e){
-        		if(!confirm('¿Está seguro que desea eliminar este elemento?')){
-        	    	e.preventDefault();
-        	    	return false;
-        		}
-        		return true;
-    		});
-		});
-	</script>
-	
-	
-</head>
-
 <div id="someDiv" class="container" style="margin-left: 13%">
 	<h1>VENTAS</h1>
 

@@ -5,30 +5,29 @@
     
 <form id="form" name="form" action="<?=base_url()?>index.php/Insumos/addInsumo" method="POST">
       
-       <label for="NOMBRE_I">Nombre</label>
-       <input type="input" name="NOMBRE_I" value="" required /><br />
-       <label for="PRECIO_C">Precio de compra</label>
-       <input type="input" name="PRECIO_C" value="" required/><br />
-       <label for="MARCA">Marca</label>
-       <input type="input" name="MARCA" value="" required/><br />
-       <label for="STOCK">Stock</label>
-       <input type="input" name="STOCK" value="" required/><br />
+                            
+        <input type="button" class="btn btn-default" style="margin-left: 70%" value="volver" name="volver" onclick="history.back()" />
+        <br>              
+                        
+       <label for="NOMBRE_I">Nombre del insumo</label><br>
+       <input type="input" name="NOMBRE_I" style=" width: 40%; padding: 10px 20px; border: 1px solid #ccc; border-radius: 4px;  box-sizing: border-box;"required /><br />
+       <label for="PRECIO_C">Precio de compra</label><br>
+       <input type="number" name="PRECIO_C" style=" width: 40% ;padding: 10px 20px; border: 1px solid #ccc; border-radius: 4px;  box-sizing: border-box;" required/><br />
+       <label for="MARCA">Marca</label><br>
+       <input type="input" name="MARCA" style=" width: 40%;padding: 10px 20px; border: 1px solid #ccc; border-radius: 4px;  box-sizing: border-box;" required/><br />
+       <label for="STOCK">Stock</label><br>
+       <input type="number" name="STOCK" style=" width: 40%;padding: 10px 20px; border: 1px solid #ccc; border-radius: 4px;  box-sizing: border-box;" required/><br />
        <label> Proveedores </label>
-       <select style="display: block;" name="selectProveedores">
+       <select style=" width: 40%" name="selectProveedores">
        <?php foreach ($proveedores as $k => $v): ?>
         <option type="input" value="<?php echo $v["ID_PROVEEDOR"] ?>" required><?php echo $v["NOMBRE_P"] ?></option>
         <?php endforeach ?>
 
 </select>
 <br>
-<label> Sucursal </label>
-<select style="display: block;" name="selectSucursales" >
-  <?php foreach ($sucursales as $p => $q): ?>
-    <option type="input"  value="<?php echo $q["ID_SUCURSAL"] ?>" required><?php echo $q["NOMBRE_S"] ?></option>
-  <?php endforeach ?>
-</select> 
 
-       <input type="submit" name="editar" value="Agregar insumo" />
+
+       <input type="submit" name="editar" class="btn btn-default" value="Crear insumo" />
 </form>
  
   </div>
