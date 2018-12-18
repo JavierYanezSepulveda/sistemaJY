@@ -8,11 +8,17 @@
       <?php echo form_open(base_url().'index.php/Ucc/add'); ?>
             <input type="button" class="btn btn-default" style="margin-left: 70%" value="volver" name="volver" onclick="history.back()" /><br>
 
-       <label for="NOMBRE" >Nombre</label>
+       <label for="NOMBRE" >Nombre</label><br />
        <input type="input" name="NOMBRE" required/><br />
-       <label for="NUMERO_UCC" >Código</label>
+       <label for="NUMERO_UCC" >Código</label><br />
        <input type="input" name="NUMERO_UCC" required/><br />
-       <label for="ANEXO">Anexo</label>
+       <label>Tipo de material</label>
+            <select class="browser-default select-producto" id="TIPO_MATERIAL" name="TIPO_MATERIAL" style="width:40%">
+                <option  type ="input" value="0">Administrativo</option>
+                <option  type ="input" value="1">Enseñanza</option>
+               
+         </select><br>
+       <label for="ANEXO">Anexo</label><br />
        <input type="input" name="ANEXO" /><br />
 
        <input type="submit" class="btn btn-default" name="submit" value="Añadir UCC" />

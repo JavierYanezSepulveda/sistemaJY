@@ -7,6 +7,7 @@ class Ventas extends CI_Controller {
 		parent::__construct();
 		$this->load->helper("url");
 		$this->load->model("Ventas_model");
+		$this->load->model("Compras_model");
 		$this->load->library("session");
 		$this->load->database();
 	}
@@ -36,7 +37,7 @@ class Ventas extends CI_Controller {
 					$valores[] = $valor;
 				}
 
-		$x = count($data);
+		$x = count($data)-1;
 		$cantidad = 'cantidad';
 		$total= 0 ;
 				
@@ -49,7 +50,9 @@ class Ventas extends CI_Controller {
 					$total=$total+$precio_total; 
 				}
 
-		$this->Ventas_model->add_venta($total);
+		$item = $this->Ventas_model->add_venta($total);
+		if ($item != FALSE) {
+
 		$ultimo_id_venta = $this->db->select('ID_VENTA')->from('VENTA')->where('N_ORDEN', null)->order_by('ID_VENTA',"desc")->limit(1)->get()->row(); 
         $ultimo_id_venta = (array) $ultimo_id_venta;
         $ultimo=$ultimo_id_venta['ID_VENTA'];
@@ -69,6 +72,11 @@ class Ventas extends CI_Controller {
 		
 		echo "<script>alert('¡Venta realizada!.');</script>";
  		redirect('Ventas/add', 'refresh');
+ 		}else{
+ 			echo "<script>alert('¡Número Boleta repetido!.');</script>";
+ 			redirect('Ventas/add', 'refresh');
+ 		}
+
 	}
 
 	public function lista_ventas(){
@@ -96,7 +104,19 @@ class Ventas extends CI_Controller {
 
 		$this->load->helper('url');
         $id = $this->uri->segment(3);
+        $items = $this->Ventas_model->insumos_cantidad($id);
         $this->Ventas_model->desactivar($id);
+        $x = count($items);
+        for($i=0; $i<$x; $i++){
+        	$producto = $items[$i]['ID_PRODUCTO'];
+        	$N = $this->Ventas_model->obtener_id_insumo($producto);
+        	$n = $N[0]['ID_INSUMO'];
+        	$m = $items[$i]['CANTIDAD'];
+        	$stock_1 = $this->Ventas_model->stock($n);
+			$stock = $stock_1[0]['STOCK'];
+			$cantidad_total= $stock + $m;
+			$this->Compras_model->sumar($n, $cantidad_total);
+        }
         redirect('Ventas/lista_ventas', 'refresh');
 	}
 
@@ -104,7 +124,19 @@ class Ventas extends CI_Controller {
 
 		$this->load->helper('url');
         $id = $this->uri->segment(3);
+        $items = $this->Ventas_model->insumos_cantidad($id);
         $this->Ventas_model->activar($id);
+        $x = count($items);
+        for($i=0; $i<$x; $i++){
+        	$producto = $items[$i]['ID_PRODUCTO'];
+        	$N = $this->Ventas_model->obtener_id_insumo($producto);
+        	$n = $N[0]['ID_INSUMO'];
+        	$m = $items[$i]['CANTIDAD'];
+        	$stock_1 = $this->Ventas_model->stock($n);
+			$stock = $stock_1[0]['STOCK'];
+			$cantidad_total= $stock - $m;
+			$this->Compras_model->sumar($n, $cantidad_total);
+        }
         redirect('Ventas/lista_ventas', 'refresh');
 	}
 

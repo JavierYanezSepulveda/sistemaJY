@@ -11,6 +11,7 @@ class Compras extends CI_Controller {
 		$this->load->model("Ucc_model");
 		$this->load->model("Compras_model");
 		$this->load->model("Insumos_model");
+		$this->load->model("Proveedores_model");
 		$this->load->library("session");
 		$this->load->database();
 	}
@@ -18,8 +19,10 @@ class Compras extends CI_Controller {
 	public function add(){
 		$id_s = $this->session->userdata('ID_SUCURSAL');
         $insumos = $this->Insumos_model->obtener_todos($id_s);
+        $proveedores = $this->Proveedores_model->obtener_todos();
         $data = array(
 						"insumos" => $insumos,
+						"proveedores" => $proveedores
 						);
 
         $this->load->view('header');
@@ -56,7 +59,10 @@ class Compras extends CI_Controller {
 				}
 
 
-		$this->Compras_model->add_compra($subtotal,$total);
+		$item = $this->Compras_model->add_compra($subtotal,$total);
+		if ($item != FALSE) {
+        	
+        
 		$ultimo_id_orden = $this->db->select('ID_COMPRA')->from('COMPRA')->order_by('ID_COMPRA',"desc")->limit(1)->get()->row(); 
         $ultimo_id_orden = (array) $ultimo_id_orden;
         $ultimo=$ultimo_id_orden['ID_COMPRA'];
@@ -76,6 +82,10 @@ class Compras extends CI_Controller {
 		
 		echo "<script>alert('¡Compra realizada!.');</script>";
  		redirect('Compras/add', 'refresh');
+ 		}else{
+        	echo "<script>alert('¡Número Factura repetido!.');</script>";
+ 			redirect('Compras/add', 'refresh');
+        }
 	}
 
 	public function lista_compras(){
@@ -102,7 +112,18 @@ class Compras extends CI_Controller {
 
 		$this->load->helper('url');
         $id = $this->uri->segment(3);
+        $items = $this->Compras_model->insumos_cantidad($id);
         $this->Compras_model->desactivar($id);
+        $x = count($items);
+        var_dump($x);
+        for($i=0; $i<$x; $i++){
+        	$n = $items[$i]['ID_INSUMO'];
+        	$m = $items[$i]['CANTIDAD'];
+        	$stock_1 = $this->Ventas_model->stock($n);
+			$stock = $stock_1[0]['STOCK'];
+			$cantidad_total= $stock + $m;
+			$this->Compras_model->sumar($n, $cantidad_total);
+        }
         redirect('Compras/lista_compras', 'refresh');
 	}
 
@@ -110,7 +131,18 @@ class Compras extends CI_Controller {
 
 		$this->load->helper('url');
         $id = $this->uri->segment(3);
+        $items = $this->Compras_model->insumos_cantidad($id);
         $this->Compras_model->activar($id);
+        $x = count($items);
+        var_dump($x);
+        for($i=0; $i<$x; $i++){
+        	$n = $items[$i]['ID_INSUMO'];
+        	$m = $items[$i]['CANTIDAD'];
+        	$stock_1 = $this->Ventas_model->stock($n);
+			$stock = $stock_1[0]['STOCK'];
+			$cantidad_total= $stock - $m;
+			$this->Compras_model->sumar($n, $cantidad_total);
+        }
         redirect('Compras/lista_compras', 'refresh');
 	}
 	

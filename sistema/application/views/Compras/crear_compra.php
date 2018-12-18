@@ -13,10 +13,14 @@
         <input type="number" name="N_FACTURA" value="" min="0" max="9999999999" size="30" required/><br />
         <label for="FECHA_INGRESO">FECHA DE INGRESO</label><br>
         <input type="date" name="FECHA_INGRESO" value="<?php echo date("Y-m-d");?>" size="30" required/><br />
-        <label for="RUT_PROVEEDOR">RUT PROVEEDOR (Sin digito verificador)</label><br>
-        <input type="number" name="RUT_PROVEEDOR" value="" min="0" max="9999999999" size="30" required/><br />
+        <label>Proveedor</label>
+        <select  class="form-control"  id="RUT_PROVEEDOR" name ="RUT_PROVEEDOR" style="width: 40%">
+        <?php foreach ($proveedores as $v):?>     
+        <option type ="input" name="selectRUT" value="<?php echo $v["RUT_PROVEEDOR"]?> "><?php echo $v["NOMBRE_P"] ?></option>  <br />
+        <?php endforeach ?> </select>
         <br>
-        <label for="Insumos">Insumos</label><br>
+        <label for="Insumos">Insumos</label>
+        <label for="Cantidad" style="margin-left: 26%">Cantidad</label><br>
         <div id="seccionInsumos"></div>
         <label>Subtotal:</label>
         <div id="subtotal"></div>
@@ -24,7 +28,7 @@
         <div id="total"></div>
         <div id="jsAux"></div>
         <body onload="clickButton()">
-        <input type="button" name="editar" id="addItem" value="+ Agregar insumo" class="btn btn-default " />
+        <input type="button" name="editar" id="addItem" value="+ Agregar insumo" class="btn btn-default" style="width:20%" />
         <br>
         <br>
         <label>Finalizar compra</label>
@@ -47,7 +51,7 @@
     var insumos = <?php echo json_encode($insumos) ?>;
     var tpl = "";
    
-    tpl += "<div class=\"row newProduct\" ><div class=\"col s12 m6 l4\"><select class=\"browser-default select-insumo\" name=\""+insumo+"\"+x id=\"insumo"+insumo+"\"+x value=\""+insumos.ID_INSUMO+"\">";
+    tpl += "<div class=\"row newProduct\" ><select class=\"browser-default select-insumo\" style=\"width: 30%; margin-left:1%;\" name=\""+insumo+"\"+x id=\"insumo"+insumo+"\"+x value=\""+insumos.ID_INSUMO+"\">";
     
     for(var i = 0; i < insumos.length; i++){
       
@@ -55,7 +59,7 @@
     
     }
     
-    tpl += "</select></div><div class=\"col s12 m6 l4 input-field\"><input type=\"number\" class=\"valor\" min=\"0\"name=\"cantidad"+cantidad+"\" style=\"width:20%\"><label for=\"\">Cantidad</label></div></div>";
+    tpl += "</select><input type=\"number\" class=\"valor\" min=\"0\"name=\"cantidad"+cantidad+"\" style=\"width:9%;  background-color:white;\"></div>";
     
     cantidad++;
     insumo++;

@@ -7,10 +7,11 @@ class Productos_model extends CI_Model {
 
    } 
 
-      public function obtener_todos(){
+      public function obtener_todos($ID_SUCURSAL){
       $this->load->database('SCA');	
       $this->db->select('*');
       $this->db->from('PRODUCTO');
+      $this->db->where('ID_SUCURSAL', $ID_SUCURSAL);
       $this->db->join('INSUMO', 'INSUMO.ID_INSUMO = PRODUCTO.ID_INSUMO');
       $this->db->join('SUCURSAL', 'SUCURSAL.ID_SUCURSAL = PRODUCTO.ID_SUCURSAL');
       $this->db->order_by('ID_PRODUCTO', 'asc');

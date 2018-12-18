@@ -13,23 +13,24 @@
         <label for="FECHA_INGRESO">FECHA DE INGRESO</label><br>
         <input type="date" name="FECHA_INGRESO" value="<?php echo date("Y-m-d");?>" size="30" required/><br />
         <br>
-        <label>Tipo venta</label><br>
-        <label>Venta normal</label>
-        <input type="radio" name="myradio" value="0" <?php echo  set_radio('myradio', '0', TRUE); ?> /><br>
-        <label>TRANSBANK</label>
-        <input type="radio" name="myradio" value="1" <?php echo  set_radio('myradio', '1',TRUE); ?> /><br>
+        <label>Tipo de venta</label>
+            <select class="browser-default select-producto" id="selectVenta"name="selectVenta" style="width:40%">
+                <option  type ="input" value="0">Normal</option>
+                <option  type ="input" value="1">Transbank</option>
+               
+         </select><br>
         <label for="Productos">Productos</label><br>
         <div id="seccionProductos"></div>
         <label>Total:</label>
         <div id="total"></div>
         <div id="jsAux"></div>
         <body onload="clickButton()">
-        <input type="button" name="editar" id="addItem" value="+ Agregar producto" class="btn btn-default" style="margin-left: 70%" />
+        <input type="button" name="editar" id="addItem" value="+ Agregar producto" class="btn btn-default" style="margin-left: 70%; width: 20%" />
         <br>
         <br>
         <label style="margin-left: 70%">Finalizar venta</label>
         <br>
-        <input type="submit" value="Finalizar venta" class="btn btn-default" style="margin-left: 70%; display: block;"/>
+        <input type="submit" value="Finalizar venta" class="btn btn-default" style="margin-left: 70%;width: 20%; display: block;"/>
       </form>
  
   </div>

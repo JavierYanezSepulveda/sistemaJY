@@ -13,7 +13,7 @@ class Insumos_model extends CI_Model {
       $this->db->select('*');
       $this->db->from('INSUMO');
       $this->db->where('ID_SUCURSAL', $ID_SUCURSAL);
-      $this->db->join('PROVEEDOR', 'PROVEEDOR.RUT_PROVEEDOR = INSUMO.ID_PROVEEDOR');
+      $this->db->join('PROVEEDOR', 'PROVEEDOR.RUT_PROVEEDOR = INSUMO.RUT_PROVEEDOR');
       $this->db->order_by('ID_INSUMO', 'asc');
       $result = $this->db->get();
       return  $result->result_array();

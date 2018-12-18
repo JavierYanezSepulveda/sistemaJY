@@ -17,8 +17,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
     public function moduloproducto(){   
-
-      	$data['productos'] = $this->Productos_model->obtener_todos();
+        $ID_SUCURSAL = $this->session->userdata('ID_SUCURSAL');
+      	$data['productos'] = $this->Productos_model->obtener_todos($ID_SUCURSAL);
     	$this->load->view('header');
         $this->load->view('Productos/view_moduloproducto', $data);
         $this->load->view('menu_lateral');
@@ -43,15 +43,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $data  =  array( 
                         "insumos"  =>  $insumos
                     );
-        
-        if ($this->form_validation->run() === FALSE){
-    
+       
+                   
             $this->load->view('header');
             $this->load->view('Productos/add',$data);   
             $this->load->view('menu_lateral');
             $this->load->view('footer');
         }
-        else{	
+
+    public function addProducto(){
     
             $NOMBRE   = $this->input->post('NOMBRE');
             $PRECIO_V  = $this->input->post('PRECIO_V');
@@ -63,8 +63,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             redirect('Productos/moduloproducto', 'refresh');
             
         }
-    }
-
+    
     public function edit(){
 
         $id = $this->uri->segment(3);

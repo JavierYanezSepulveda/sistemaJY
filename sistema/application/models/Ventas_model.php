@@ -25,10 +25,17 @@ class Ventas_model extends CI_Model {
       $id_u = $this->session->userdata('RUT');
       $N_BOLETA = $this->input->post('N_BOLETA', true);
       $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
-      $TIPO_VENTA = $this->input->post('selectTipo_venta', true);
-      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, Observacion,ID_Sucursal)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, '$TIPO_VENTA', '$total', null, '$id_s')";
+      $TIPO_VENTA = $this->input->post('selectVenta', true);
+      $this->db->where('N_BOLETA', $N_BOLETA);
+       $query = $this->db->get('VENTA');
+      if ($query->num_rows() == 0){
+      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, TIPO_VENTA,ID_Sucursal,ESTADO)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, null, '$total', '$TIPO_VENTA', '$id_s', 1)";
       $result = $this->db->query($data);
-        
+      return $result;
+      }else{
+        return FALSE;
+       }
+   
   	}
 
     public function add_venta_producto($n,$m,$ultimo){
@@ -110,6 +117,16 @@ class Ventas_model extends CI_Model {
 
     }
 
+    public function obtener_id_insumo($producto){
+
+      $this->db->select('ID_INSUMO');
+      $this->db->from('PRODUCTO');
+      $this->db->where('ID_PRODUCTO', $producto);
+      $result = $this->db->get();
+      return  $result->result_array();
+
+    }
+
      public function desactivar($id){
       $this->db->where('ID_VENTA', $id);
       $this->db->set('ESTADO', 0);
@@ -119,6 +136,16 @@ class Ventas_model extends CI_Model {
       $this->db->where('ID_VENTA', $id);
       $this->db->set('ESTADO', 1);
       return $this->db->update('VENTA');
+    }
+
+    public function insumos_cantidad($id){
+
+      $this->db->select('ID_PRODUCTO, CANTIDAD');
+      $this->db->from('ITEMS_VENTA');
+      $this->db->where('ID_VENTA', $id);
+      $result = $this->db->get();
+      return  $result->result_array();
+
     }
  }
 ?>

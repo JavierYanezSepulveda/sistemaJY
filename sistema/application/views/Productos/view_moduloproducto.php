@@ -12,7 +12,6 @@
       <th>Nombre</th>
       <th>Precio venta</th>
       <th>Insumo</th>
-      <th>Sucursal</th>
       <th>Estado</th>
       <th>Editar</th>
       <th>Eliminar</th>
@@ -27,7 +26,6 @@
       <td ><?php echo $item['NOMBRE'];?></td>
       <td ><?php echo $item['PRECIO_V'];?></td>
       <td ><?php echo $item['NOMBRE_I'];?></td>
-      <td ><?php echo $item['NOMBRE_S'];?></td>
       <?php if ($item['ESTADO'] === '1'):?>
           <td>Activo</td> 
       <?php elseif($item['ESTADO'] === '0') :?>

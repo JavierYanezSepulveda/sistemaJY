@@ -14,9 +14,16 @@ class Compras_model extends CI_Model {
       $N_FACTURA = $this->input->post('N_FACTURA', true);
       $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
       $RUT_PROVEEDOR = $this->input->post('RUT_PROVEEDOR', true);
-      $data = "INSERT INTO COMPRA (ID_Compra,ID_Usuario,N_Factura, Fecha_ingreso, ID_UCC,Subtotal,IVA,Total, RUT_PROVEEDOR,ID_Sucursal, ESTADO)values (compra_seq.nextval, '$id_u', '$N_FACTURA', TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, '$subtotal',null,'$total', '$RUT_PROVEEDOR', '$id_s', 1)";
+      $this->db->where('N_FACTURA', $N_FACTURA);
+       $query = $this->db->get('COMPRA');
+       if ($query->num_rows() == 0){
+      $data = "INSERT INTO COMPRA (ID_Compra,ID_Usuario,N_Factura, Fecha_ingreso, ID_UCC,Subtotal,IVA,Total, RUT_PROVEEDOR,ID_Sucursal, ESTADO) values (compra_seq.nextval, '$id_u', '$N_FACTURA', TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, '$subtotal',null,'$total', '$RUT_PROVEEDOR', '$id_s', 1)";
       $result = $this->db->query($data);
-        
+      return $result;
+    }else{
+        return FALSE;
+       }
+
   	}
 
     public function add_compra_producto($n,$m,$ultimo){
@@ -79,6 +86,16 @@ class Compras_model extends CI_Model {
       $this->db->where('ID_COMPRA', $id);
       $this->db->set('ESTADO', 1);
       return $this->db->update('COMPRA');
+    }
+
+    public function insumos_cantidad($id){
+
+      $this->db->select('ID_INSUMO, CANTIDAD');
+      $this->db->from('ITEMS_COMPRA');
+      $this->db->where('ID_COMPRA', $id);
+      $result = $this->db->get();
+      return  $result->result_array();
+
     }
  }
 ?>

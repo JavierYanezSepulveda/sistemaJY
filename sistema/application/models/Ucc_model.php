@@ -20,10 +20,18 @@ class Ucc_model extends CI_Model {
         $NOMBRE = $this->input->post('NOMBRE');
          $NUMERO_UCC = $this->input->post('NUMERO_UCC');
          $ANEXO = $this->input->post('ANEXO');
-        $data = "INSERT INTO UCC(ID_UCC, NUMERO_UCC, NOMBRE, ANEXO) values(ucc_seq.nextval, '$NUMERO_UCC', '$NOMBRE', '$ANEXO')";
+         $TIPO_MATERIAL = $this->input->post('TIPO_MATERIAL');
+         $this->db->where('NUMERO_UCC', $NUMERO_UCC);
+       $query = $this->db->get('UCC');
+       if ($query->num_rows() == 0){
+        $data = "INSERT INTO UCC(ID_UCC, NUMERO_UCC, NOMBRE, ANEXO, TIPO_MATERIAL) values(ucc_seq.nextval, '$NUMERO_UCC', '$NOMBRE', '$ANEXO', '$TIPO_MATERIAL')";
         $result = $this->db->query($data); 
     
     return $result;
+       }else{
+        return FALSE;
+       }
+        
   	}
 
   	

@@ -9,6 +9,7 @@
 				<th>ID</th>
 				<th>Numero_UCC</th>
 				<th>Nombre</th>
+				<th>Tipo de Material</th>
 				<th>Anexo</th>
 				<th>Editar</th>
 				<th>Eliminar</th>
@@ -26,6 +27,7 @@
 			<td><?=	$fila['ID_UCC'];?></td>
 			<td><?= $fila['NUMERO_UCC'];?></td>
 			<td><?= $fila['NOMBRE'];?></td>
+			<td><?= $fila['TIPO_MATERIAL'];?></td>
 			<td><?= $fila['ANEXO'];?></td>
 			<td><a href="<?php echo base_url();?>index.php/Ucc/editar/<?=$fila['ID_UCC'];?>">Editar</a></td>
 			<td><a href="<?php echo base_url();?>index.php/Ucc/delete/<?=$fila['ID_UCC'];?>" class="delete">Eliminar</a>

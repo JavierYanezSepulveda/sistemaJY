@@ -53,7 +53,7 @@ class Insumos extends CI_Controller {
 				$MARCA = $row->MARCA;
 				$PRECIO_C = $row->PRECIO_C;
 				$STOCK = $row->STOCK;
-				$ID_PROVEEDOR = $row->ID_PROVEEDOR;
+				$RUT_PROVEEDOR = $row->RUT_PROVEEDOR;
 			}
 			$data = array(
 							'id' => $id, 
@@ -61,12 +61,12 @@ class Insumos extends CI_Controller {
 							'PRECIO_C' => $PRECIO_C,
 							'MARCA' => $MARCA,
 							'STOCK' => $STOCK,
-							'ID_PROVEEDOR' => $ID_PROVEEDOR
+							'RUT_PROVEEDOR' => $RUT_PROVEEDOR
 							
 						);
 			$proveedores = $this->Insumos_model->obtener_proveedores();
 			$data['proveedores'] = $proveedores;
-			$proveedor = $this->Insumos_model->obtener_proveedor($ID_PROVEEDOR);
+			$proveedor = $this->Insumos_model->obtener_proveedor($RUT_PROVEEDOR);
 			$data['proveedor'] = $proveedor;
 		}else{
 			return FALSE;
@@ -83,7 +83,7 @@ class Insumos extends CI_Controller {
 						'PRECIO_C' => $this->input->post('PRECIO_C', true),
 						'MARCA' => $this->input->post('MARCA', true),
 						'STOCK' => $this->input->post('STOCK', true),
-						'ID_PROVEEDOR' => $this->input->post('selectProveedores', true),
+						'RUT_PROVEEDOR' => $this->input->post('selectProveedores', true),
 						'ID_SUCURSAL' => $this->session->userdata('ID_SUCURSAL')
 
 		);
