@@ -10,7 +10,7 @@
         <input type="date" name="FECHA_INGRESO" value="<?php echo date("Y-m-d");?>" size="30" required/><br />
         <label for="Insumos">Cantidad</label><br>
         <input type="number" name="CANTIDAD" size="30" required/><br />
-        <input type="submit" value="Ingresar beca" class="btn btn-default" "/>
+        <input type="submit" value="Ingresar beca" class="btn UCM" "/>
       </form>
  
   </div>
