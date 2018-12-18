@@ -85,5 +85,16 @@ class Productos_model extends CI_Model {
       $this->db->where('ID_PRODUCTO', $id);
       $this->db->update('PRODUCTO', $data);
     }
+
+    public function desactivar($id){
+      $this->db->where('ID_PRODUCTO', $id);
+      $this->db->set('ESTADO', 0);
+      return $this->db->update('PRODUCTO');
+    }
+    public function activar($id){
+      $this->db->where('ID_PRODUCTO', $id);
+      $this->db->set('ESTADO', 1);
+      return $this->db->update('PRODUCTO');
+    }
 }
 ?>

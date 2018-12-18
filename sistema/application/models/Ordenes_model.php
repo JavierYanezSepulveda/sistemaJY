@@ -27,9 +27,15 @@ class Ordenes_model extends CI_Model {
       $UCC = $this->input->post('selectUCC', true);
       $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
       $TIPO_VENTA = $this->input->post('selectTipo_venta', true);
-      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, Observacion,ID_Sucursal)values (venta_seq.nextval, '$id_u', null,'$N_ORDEN' , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), '$UCC', '$TIPO_VENTA', '$total', null, '$id_s')";
+      $this->db->where('N_ORDEN', $N_ORDEN);
+       $query = $this->db->get('VENTA');
+      if ($query->num_rows() == 0){
+      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, TIPO_VENTA,ID_Sucursal)values (venta_seq.nextval, '$id_u', null,'$N_ORDEN' , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), '$UCC', '$TIPO_VENTA', '$total', null, '$id_s')";
       $result = $this->db->query($data);
-        
+      return $result;
+      }else{
+        return FALSE;
+      }
   	}
 
     public function add_orden_producto($n,$m,$ultimo){
@@ -46,6 +52,7 @@ class Ordenes_model extends CI_Model {
       $this->db->select('*');
       $this->db->from('PRODUCTO');
       $this->db->where('ID_SUCURSAL', $ID_SUCURSAL);
+      $this->db->where('ESTADO', 1);
       $proveedor=$this->db->get();
       return $proveedor->result_array();
     }

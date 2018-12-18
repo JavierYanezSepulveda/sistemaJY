@@ -61,6 +61,7 @@ class Ventas_model extends CI_Model {
       $this->db->select('*');
       $this->db->from('PRODUCTO');
       $this->db->where('ID_SUCURSAL', $ID_SUCURSAL);
+      $this->db->where('ESTADO', 1);
       $proveedor=$this->db->get();
       return $proveedor->result_array();
     }

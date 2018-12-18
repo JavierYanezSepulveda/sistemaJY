@@ -131,4 +131,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         echo "<script>alert('¡Producto actualizado!');</script>";
         redirect('Productos/moduloproducto', 'refresh');
     }
+
+    public function desactivar(){
+
+        $this->load->helper('url');
+        $id = $this->uri->segment(3);
+        $this->Productos_model->desactivar($id);
+        redirect('Productos/moduloproducto', 'refresh');
+    }
+
+    public function activar(){
+
+        $this->load->helper('url');
+        $id = $this->uri->segment(3);
+        $this->Productos_model->activar($id);
+        redirect('Productos/moduloproducto', 'refresh');
+    }
 }

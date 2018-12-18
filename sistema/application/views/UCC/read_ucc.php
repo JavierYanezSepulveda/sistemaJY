@@ -27,7 +27,14 @@
 			<td><?=	$fila['ID_UCC'];?></td>
 			<td><?= $fila['NUMERO_UCC'];?></td>
 			<td><?= $fila['NOMBRE'];?></td>
-			<td><?= $fila['TIPO_MATERIAL'];?></td>
+	
+			<?php if ($fila['TIPO_MATERIAL'] === '0'|| $fila['TIPO_MATERIAL'] === null):?>
+          	<td>Administrativo</a></td> 
+      		<?php elseif($fila['TIPO_MATERIAL'] === '1' ) :?>
+          	<td>Enseñanza</a></td> 
+      		<?php endif;?>
+
+			
 			<td><?= $fila['ANEXO'];?></td>
 			<td><a href="<?php echo base_url();?>index.php/Ucc/editar/<?=$fila['ID_UCC'];?>">Editar</a></td>
 			<td><a href="<?php echo base_url();?>index.php/Ucc/delete/<?=$fila['ID_UCC'];?>" class="delete">Eliminar</a>

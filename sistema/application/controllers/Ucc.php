@@ -82,8 +82,7 @@ class Ucc extends CI_Controller {
 	$this->form_validation->set_rules('NUMERO_UCC', 'NUMERO_UCC', 'required');
 	$this->form_validation->set_rules('ANEXO', 'ANEXO', 'required');
 	
-    if ($this->form_validation->run() == FALSE)
-    {
+    
         
         $this->load->view('header');
 		$this->load->view('menu_lateral');
@@ -91,14 +90,13 @@ class Ucc extends CI_Controller {
 		$this->load->view('footer');
 
     }
-    else
-    {	
+    public function addUcc(){	
     	$this->load->view('header');
 		$this->load->view('menu_lateral');
         $item = $this->Ucc_model->add();
         if ($item != FALSE) {
         	echo "<script>alert('¡UCC ingresada con éxito!.');</script>";
- 			redirect('Ucc/add', 'refresh');
+ 			redirect('Ucc/index', 'refresh');
         }else{
         	echo "<script>alert('¡Número de UCC repetido!.');</script>";
  			redirect('Ucc/add', 'refresh');
@@ -107,5 +105,5 @@ class Ucc extends CI_Controller {
     }
     
 
-	}
+	
 }

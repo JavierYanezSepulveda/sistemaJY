@@ -27,9 +27,9 @@
       <td ><?php echo $item['PRECIO_V'];?></td>
       <td ><?php echo $item['NOMBRE_I'];?></td>
       <?php if ($item['ESTADO'] === '1'):?>
-          <td>Activo</td> 
+          <td><a href="<?php echo base_url();?>index.php/Productos/desactivar/<?=$item['ID_PRODUCTO'];?>">Activo</a></td> 
       <?php elseif($item['ESTADO'] === '0') :?>
-          <td>Inactivo</td> 
+          <td><a href="<?php echo base_url();?>index.php/Productos/activar/<?=$item['ID_PRODUCTO'];?>">Inactivo</a></td> 
       <?php endif;?>
       
 

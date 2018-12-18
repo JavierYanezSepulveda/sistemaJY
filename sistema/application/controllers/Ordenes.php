@@ -51,7 +51,8 @@ class Ordenes extends CI_Controller {
 				}
 
 
-		$this->Ordenes_model->add_orden($total);
+		$item = $this->Ordenes_model->add_orden($total);
+		if ($item != FALSE) {
 		$ultimo_id_orden = $this->db->select('ID_VENTA')->from('VENTA')->where('N_BOLETA', null)->order_by('ID_VENTA',"desc")->limit(1)->get()->row(); 
         $ultimo_id_orden = (array) $ultimo_id_orden;
         $ultimo=$ultimo_id_orden['ID_VENTA'];
@@ -71,8 +72,12 @@ class Ordenes extends CI_Controller {
 								
 				}		
 		
-		echo "<script>alert('¡Venta realizada!.');</script>";
- 		redirect('Ordenes/add', 'refresh');
+			echo "<script>alert('¡Orden realizada!.');</script>";
+	 		redirect('Ordenes/add', 'refresh');
+ 		}else{
+ 			echo "<script>alert('¡Numero de Orden repetido!.');</script>";
+ 			redirect('Ordenes/add', 'refresh');
+ 		}
 	}
 
 	public function lista_ordenes(){

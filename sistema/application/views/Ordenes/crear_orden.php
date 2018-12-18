@@ -14,25 +14,27 @@
         <input type="date" name="FECHA_INGRESO" value="<?php echo date("Y-m-d");?>" size="30" required/><br />
         <br>
         <label> UCC </label>
-        <select style="display: block; width: 30%;" name="selectUCC" class="col s12 m6 l4 input-field">
+        <select class="form-control" style="width: 40%;" name="selectUCC" >
         <?php foreach ($UCC as $k => $v): ?>
         <option type="input" value="<?php echo $v["ID_UCC"] ?>" required><?php echo $v["NOMBRE"] ?></option>
         <?php endforeach ?>
 
         </select>
         <br>
-        <label for="Productos">Productos</label><br>
+        <label for="Productos">Productos</label>
+        <label for="Cantidad" style="margin-left: 26%">Cantidad</label>
+        <br>
         <div id="seccionProductos"></div>
         <label>Total:</label>
         <div id="total"></div>
         <div id="jsAux"></div>
         <body onload="clickButton()">
-        <input type="button" name="editar" id="addItem" value="+ Agregar producto" class="btn btn-default " />
+        <input type="button" name="editar" id="addItem" value="+ Agregar producto" class="btn btn-default " style="width:20%" />
         <br>
         <br>
         <label>Finalizar orden</label>
         <br>
-        <input type="submit" value="Finalizar orden" class="btn btn-default" "/>
+        <input type="submit" value="Finalizar orden" class="btn btn-default" style="width: 40%; display: block;"/>
       </form>
  
   </div>
@@ -50,7 +52,7 @@
     var productos = <?php echo json_encode($productos) ?>;
     var tpl = "";
    
-    tpl += "<div class=\"row newProduct\" ><div class=\"col s12 m6 l4\"><select class=\"browser-default select-producto\" name=\""+producto+"\"+x id=\"producto\"+x value=\""+productos.ID_PRODUCTO+"\">";
+    tpl += "<div class=\"row newProduct\" ><select class=\"browser-default select-producto\" style=\"width: 30%; margin-left:1%;\" name=\""+producto+"\"+x id=\"producto\"+x value=\""+productos.ID_PRODUCTO+"\">";
     
     for(var i = 0; i < productos.length; i++){
       
@@ -58,7 +60,7 @@
     
     }
     
-    tpl += "</select></div><div class=\"col s12 m6 l4 input-field\"><input type=\"number\" class=\"valor\" min=\"0\"name=\"cantidad"+cantidad+"\" style=\"width:20%\"><label for=\"\">Cantidad</label></div></div>";
+    tpl += "</select><input type=\"number\" class=\"valor\" min=\"0\"name=\"cantidad"+cantidad+"\" style=\"width:9%;  background-color:white;\"></div>";
     
     cantidad++;
     producto++;

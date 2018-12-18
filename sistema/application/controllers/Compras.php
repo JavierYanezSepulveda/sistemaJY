@@ -115,7 +115,6 @@ class Compras extends CI_Controller {
         $items = $this->Compras_model->insumos_cantidad($id);
         $this->Compras_model->desactivar($id);
         $x = count($items);
-        var_dump($x);
         for($i=0; $i<$x; $i++){
         	$n = $items[$i]['ID_INSUMO'];
         	$m = $items[$i]['CANTIDAD'];
@@ -134,7 +133,6 @@ class Compras extends CI_Controller {
         $items = $this->Compras_model->insumos_cantidad($id);
         $this->Compras_model->activar($id);
         $x = count($items);
-        var_dump($x);
         for($i=0; $i<$x; $i++){
         	$n = $items[$i]['ID_INSUMO'];
         	$m = $items[$i]['CANTIDAD'];
