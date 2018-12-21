@@ -9,18 +9,18 @@ class Becas_model extends CI_Model {
 
    public function add_beca(){
       
-  	  // $id_s = $this->session->userdata('ID_SUCURSAL');
-     //  if($id_s != null){
-     //  $id_u = $this->session->userdata('RUT');
-     //  $N_BECA = $this->input->post('N_BOLETA', true);
-     //  $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
-     //  $CANTIDAD = $this->input->post('cantidad1', true);
-     //  $data = "INSERT INTO BECA (ID_BECA,CANTIDAD,ID_USUARIO, ID_SUCURSAL, N_BECA,FECHA_INGRESO, ESTADO)values (beca_seq.nextval, '$CANTIDAD', '$id_u','$id_s', '$N_BECA', TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 1)";
-     //  $result = $this->db->query($data);
-     //  return $result;
-     //  }else{
-     //    return null;
-     //  }
+  	  $id_s = $this->session->userdata('ID_SUCURSAL');
+      if($id_s != null){
+      $id_u = $this->session->userdata('RUT');
+      $N_BECA = $this->input->post('N_BOLETA', true);
+      $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
+      $CANTIDAD = $this->input->post('cantidad1', true);
+      $data = "INSERT INTO BECA (ID_BECA,CANTIDAD,ID_USUARIO, ID_SUCURSAL, N_BECA,FECHA_INGRESO, ESTADO)values (beca_seq.nextval, '$CANTIDAD', '$id_u','$id_s', '$N_BECA', TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 1)";
+      $result = $this->db->query($data);
+      return $result;
+      }else{
+        return null;
+      }
   	}
 
    public function obtener_becas(){

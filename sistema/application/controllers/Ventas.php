@@ -8,6 +8,8 @@ class Ventas extends CI_Controller {
 		$this->load->helper("url");
 		$this->load->model("Ventas_model");
 		$this->load->model("Compras_model");
+		$this->load->model("Ordenes_model");
+		$this->load->model("Becas_model");
 		$this->load->library("session");
 		$this->load->database();
 	}
@@ -267,18 +269,34 @@ class Ventas extends CI_Controller {
 								
 				}		
 		
-		// echo "<script>alert('¡Venta realizada!.');</script>";
- 	// 	redirect('Ventas/add', 'refresh');
+		echo "<script>alert('¡Venta realizada!.');</script>";
+ 		redirect('Ventas/add', 'refresh');
  		}else{
- 			// echo "<script>alert('¡Número Boleta repetido!.');</script>";
- 			// redirect('Ventas/add', 'refresh');
+ 			echo "<script>alert('¡Número Boleta repetido!.');</script>";
+ 			redirect('Ventas/add', 'refresh');
  		}
 
 		}elseif ($valores[2] == 'Beca') {
 			$data = count($_POST);
-      var_dump($data);
-			// $this->Becas_model->add_beca();
-
+			$producto = $this->input->post('producto1', true);
+			if($data == 6 && $producto == 'Fotocopia normal'){
+      		$item = $this->Becas_model->add_beca();
+      		if($item != null){
+      			$CANTIDAD= $this->input->post('cantidad1', true);
+				$stock_1 = $this->Ventas_model->stock(173);
+				$stock = $stock_1[0]['STOCK'];
+				$cantidad_total= $stock - $CANTIDAD;
+				$this->Ordenes_model->descontar(173, $cantidad_total);
+				echo "<script>alert('¡Beca ingresada!.');</script>";
+ 				redirect('Becas/add', 'refresh');
+			}else{
+			echo "<script>alert('¡Sesión expirada!.');</script>";
+ 			redirect('Usuarios/iniciar_sesion', 'refresh');
+			}
+      		}else{
+      			echo "<script>alert('Productos elegidos no corresponden');</script>";
+      	 		redirect('Ventas/add', 'refresh');
+      		}
 		}
 		
 	}
