@@ -5,9 +5,9 @@
     
 <form id="form" name="form" action="<?=base_url()?>index.php/Sucursales/editarSucursal/<?=$id?>" method="POST">
       <input type="button" class="btn btn-default" style="margin-left: 70%" value="volver" name="volver" onclick="history.back()" /><br>
-       <label for="NOMBRE_S">Nombre</label>
+       <label for="NOMBRE_S">Nombre</label><br />
        <input type="input" name="NOMBRE_S" value="<?=$NOMBRE_S?>" required /><br />
-       <label for="CIUDAD">Ciudad</label>
+       <label for="CIUDAD">Ciudad</label><br />
        <input type="input" name="CIUDAD" value="<?=$CIUDAD?>" required/><br />
        <br>
        

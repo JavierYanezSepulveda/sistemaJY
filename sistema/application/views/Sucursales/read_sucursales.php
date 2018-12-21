@@ -1,6 +1,6 @@
 
 <div class="container" style="margin-left: 13% ">
-	<h1>Sucurasales</h1>
+	<h1>Sucursales</h1>
 	
 	<div id="body">
 	<a href="<?php echo base_url();?>index.php/Sucursales/add" class="btn btn-default">Añadir nueva sucursal</a>

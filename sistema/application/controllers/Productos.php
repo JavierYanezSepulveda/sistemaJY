@@ -12,6 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $this->load->model("Insumos_model");
         $this->load->model("Productos_model");
         $this->load->library("session");
+        $this->load->helper('form');
         $this->load->database();
   }
 
@@ -28,16 +29,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     public function eliminar($id){
 	    
         $id = $this->uri->segment(3);
-     	$this->load->helper('url');
-        $this->Productos_model->delete_news($id);
-        echo "<script>alert('¡Producto eliminado!.');</script>";
-        redirect('Productos/moduloproducto', 'refresh');
+        
+        $verificador = $this->Productos_model->verificar($id);
+        if($verificador == null){  
+            $item = $this->Productos_model->delete_news($id);
+            echo "<script>alert('¡Producto eliminado!.');</script>";
+            redirect('Productos/moduloproducto', 'refresh');
+        }else{
+            echo "<script> alert('Producto en uso, no se puede eliminar');</script>";
+            redirect('Productos/moduloproducto', 'refresh'); 
+        }
+
     }
 
 
     public function add(){
 
-        $this->load->helper('form');
+        
         $this->load->library('form_validation');
         $insumos = $this->Insumos_model->obtener_todos();
         $data  =  array( 

@@ -51,7 +51,7 @@
     var insumos = <?php echo json_encode($insumos) ?>;
     var tpl = "";
    
-    tpl += "<div class=\"row newProduct\" ><select class=\"browser-default select-insumo\" style=\"width: 30%; margin-left:1%;\" name=\""+insumo+"\"+x id=\"insumo"+insumo+"\"+x value=\""+insumos.ID_INSUMO+"\">";
+    tpl += "<div class=\"row newProduct\" ><div class=\"col s12 m3 l4 \"><select class=\"browser-default select-insumo\"  name=\""+insumo+"\"+x id=\"insumo"+insumo+"\"+x value=\""+insumos.ID_INSUMO+"\">";
     
     for(var i = 0; i < insumos.length; i++){
       
@@ -59,7 +59,7 @@
     
     }
     
-    tpl += "</select><input type=\"number\" class=\"valor\" min=\"0\"name=\"cantidad"+cantidad+"\" style=\"width:9%;  background-color:white;\"></div>";
+    tpl += "</select></div><div class=\"col s12 m3 l2\"><input type=\"number\" class=\"valor\" min=\"0\"name=\"cantidad"+cantidad+"\" ></div></div>";
     
     cantidad++;
     insumo++;

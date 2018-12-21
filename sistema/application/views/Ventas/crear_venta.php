@@ -7,18 +7,30 @@
   <div class="container" style="margin-left: 13%">
     <h2>Crear nueva venta</h2>
       <a href="<?php echo base_url();?>index.php/Ventas/lista_ventas" class="btn btn-default" style="margin-left: 70%">Lista de ventas</a>
-      <form id="form" name="form" action="<?=base_url()?>index.php/Ventas/addVenta" method="POST">
+      <form id="form" name="form" action="<?=base_url()?>index.php/Ventas/prueba" method="POST">
         <label for="N_BOLETA">N° BOLETA</label><br>
         <input type="number" name="N_BOLETA" value="" min="0" max="9999999999" size="30" required/><br />
         <label for="FECHA_INGRESO">FECHA DE INGRESO</label><br>
         <input type="date" name="FECHA_INGRESO" value="<?php echo date("Y-m-d");?>" size="30" required/><br />
         <br>
         <label>Tipo de venta</label>
-            <select class="form-control" id="selectVenta" name="selectVenta" style="width:40%">
-                <option  type ="input" value="0">Normal</option>
-                <option  type ="input" value="1">Transbank</option>
-               
-         </select><br>
+            <select name="select"  id="select"
+          onchange="if(this.options[this.selectedIndex].value=='Transbank'){
+              toggleField(this,this.nextSibling);
+              
+          }if(this.options[this.selectedIndex].value=='Beca'){toggleField(this,this.nextSibling);
+              
+          }" >
+            <option value="Normal">Normal</option>
+            <option value="Transbank">Transbank</option>
+            <option value="Beca">Beca</option>
+            
+        </select><input name="browser" style="display:none;" disabled="disabled" 
+            onblur="if(this.value==''){toggleField(this,this.previousSibling);}">
+            
+
+
+<br>
         <label for="Productos">Productos</label>
         <label for="Cantidad" style="margin-left: 26%">Cantidad</label>
         <br>
@@ -50,7 +62,7 @@
     var productos = <?php echo json_encode($productos) ?>;
     var tpl = "";
    
-    tpl += "<div class=\"row newProduct\" ><select class=\"browser-default select-producto\" style=\"width: 30%; margin-left:1%;\" name=\""+producto+"\"+x id=\"producto\"+x value=\""+productos.ID_PRODUCTO+"\">";
+    tpl += "<div class=\"row newProduct\" ><div class=\"col s12 m3 l4 \"><select class=\"browser-default select-producto\"  name=\""+producto+"\"+x id=\"producto\"+x value=\""+productos.ID_PRODUCTO+"\">";
     
     for(var i = 0; i < productos.length; i++){
       
@@ -58,7 +70,7 @@
     
     }
     
-    tpl += "</select><input type=\"number\" class=\"valor\" min=\"0\"name=\"cantidad"+cantidad+"\" style=\"width:9%;  background-color:white;\"></div>";
+    tpl += "</select></div><div class=\"col s12 m3 l4 \"><input type=\"number\" class=\"valor\" min=\"0\"name=\"cantidad"+cantidad+"\"></div></div>";
     
     cantidad++;
     producto++;
@@ -85,4 +97,14 @@
   });
    
 
+</script>
+<script>
+
+function toggleField(hideObj,showObj){
+  hideObj.disabled=false;        
+  hideObj.style.display='inline';
+  showObj.disabled=false;   
+  showObj.style.display='inline';
+  showObj.focus();
+}
 </script>

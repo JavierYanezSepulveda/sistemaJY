@@ -76,5 +76,25 @@ class Insumos_model extends CI_Model {
 
   	}
 
- }
+    public function verificar1($id){
+
+        $this->db->select('ID_ITEMS_COMPRA');
+        $this->db->from('ITEMS_COMPRA');
+        $this->db->where('ID_INSUMO', $id);
+        $result = $this->db->get();
+        return $result->result_array();
+
+    }
+
+    public function verificar2($id){
+
+        $this->db->select('ID_PRODUCTO');
+        $this->db->from('PRODUCTO');
+        $this->db->where('ID_INSUMO', $id);
+        $result = $this->db->get();
+        return $result->result_array();
+
+    }
+
+  }
 ?>

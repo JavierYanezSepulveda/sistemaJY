@@ -52,7 +52,7 @@
     var productos = <?php echo json_encode($productos) ?>;
     var tpl = "";
    
-    tpl += "<div class=\"row newProduct\" ><select class=\"browser-default select-producto\" style=\"width: 30%; margin-left:1%;\" name=\""+producto+"\"+x id=\"producto\"+x value=\""+productos.ID_PRODUCTO+"\">";
+    tpl += "<div class=\"row newProduct\" ><div class=\"col s12 m3 l4 \"><select class=\"browser-default select-producto\"  name=\""+producto+"\"+x id=\"producto\"+x value=\""+productos.ID_PRODUCTO+"\">";
     
     for(var i = 0; i < productos.length; i++){
       
@@ -60,7 +60,7 @@
     
     }
     
-    tpl += "</select><input type=\"number\" class=\"valor\" min=\"0\"name=\"cantidad"+cantidad+"\" style=\"width:9%;  background-color:white;\"></div>";
+    tpl += "</select></div><div class=\"col s12 m3 l4 \"><input type=\"number\" class=\"valor\" min=\"0\"name=\"cantidad"+cantidad+"\" ></div></div>";
     
     cantidad++;
     producto++;

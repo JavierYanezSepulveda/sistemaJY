@@ -96,5 +96,15 @@ class Productos_model extends CI_Model {
       $this->db->set('ESTADO', 1);
       return $this->db->update('PRODUCTO');
     }
+
+    public function verificar($id){
+
+        $this->db->select('ID_ITEMS_VENTA');
+        $this->db->from('ITEMS_VENTA');
+        $this->db->where('ID_PRODUCTO', $id);
+        $result = $this->db->get();
+        return $result->result_array();
+
+    }
 }
 ?>

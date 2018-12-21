@@ -41,15 +41,20 @@ class Sucursales extends CI_Controller {
 		
           $this->load->helper('url');
           $id = $this->uri->segment(3);
-     	  
-          $item=$this->Sucursales_model->delete($id);
-          
+     	  $verificador1 = $this->Sucursales_model->verificar1($id);
+     	  $verificador2 = $this->Sucursales_model->verificar2($id);
+     	  $verificador_final = $verificador1 + $verificador2;
+    	  if($verificador_final == null){
+          	$item=$this->Sucursales_model->delete($id);
+          	echo "<script> alert('Sucursal eliminada.');</script>";
+          	redirect('Sucursales/index', 'refresh');
+          }else{
+          	echo "<script>alert('La sucursal está en uso, no se puede eliminar.');</script>";
+ 			redirect('Sucursales/index', 'refresh');
+          }
          
-		$this->load->view('header');
-		$this->load->view('menu_lateral');
-		$data['Sucursales'] = $this->Sucursales_model->obtener_todos();
-		$this->load->view('Sucursales/read_sucursales', $data);
-		$this->load->view('footer');
+
+
 	}
 
 	public function editar($id){

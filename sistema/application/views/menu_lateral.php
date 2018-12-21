@@ -116,6 +116,11 @@
               </li>
               <label>Configuraciones</label>
               <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url();?>index.php/Usuarios/index" >
+                  <span data-feather="settings"></span>
+                  Usuarios
+                </a>
+              <li class="nav-item">
                 <a class="nav-link" href="#" >
                   <span data-feather="settings"></span>
                   Config

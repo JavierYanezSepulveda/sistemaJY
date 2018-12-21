@@ -27,16 +27,20 @@ class Becas extends CI_Controller {
 	public function addBeca(){
 			
 		$CANTIDAD= $this->input->post('CANTIDAD', true);
-		$this->Becas_model->add_beca();
-		$stock_1 = $this->Ventas_model->stock(145);
+		$item = $this->Becas_model->add_beca();
+		if($item != null){
+		$stock_1 = $this->Ventas_model->stock(173);
 		$stock = $stock_1[0]['STOCK'];
 		$cantidad_total= $stock - $CANTIDAD;
-		$this->Ordenes_model->descontar(145, $cantidad_total);
+		$this->Ordenes_model->descontar(173, $cantidad_total);
 		
 		echo "<script>alert('¡Beca ingresada!.');</script>";
  		redirect('Becas/add', 'refresh');
-	}
-
+		}else{
+			echo "<script>alert('¡Sesión expirada!.');</script>";
+ 			redirect('Usuarios/iniciar_sesion', 'refresh');
+		}
+	}	
 	public function lista_becas(){
 		$data['Becas'] = $this->Becas_model->obtener_becas();
 		$this->load->view('header');
@@ -47,5 +51,31 @@ class Becas extends CI_Controller {
 
 	}
 
+	public function desactivar(){
+
+		$this->load->helper('url');
+        $id = $this->uri->segment(3);
+        $cantidad = $this->Becas_model->cantidad($id);
+        $cantidad = $cantidad[0]['CANTIDAD'];
+        $this->Becas_model->desactivar($id);
+        $stock_1 = $this->Ventas_model->stock(173);
+		$stock = $stock_1[0]['STOCK'];
+		$cantidad_total=$stock+$cantidad;
+        $this->Compras_model->sumar(173, $cantidad_total);
+        redirect('Becas/lista_becas', 'refresh');
+    }
+
+    public function activar(){
+
+		$this->load->helper('url');
+        $id = $this->uri->segment(3);
+        $cantidad = $this->Becas_model->cantidad($id);
+        $this->Becas_model->activar($id);
+        $stock_1 = $this->Ventas_model->stock($n);
+		$stock = $stock_1[0]['STOCK'];
+		$cantidad_total=$stock-$cantidad;
+        $this->Compras_model->sumar(170, $cantidad_total);
+        redirect('Becas/lista_becas', 'refresh');
+    }
 		
 }

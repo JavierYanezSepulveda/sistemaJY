@@ -9,8 +9,7 @@
 						<th>N° Beca</th>
 						<th>Cantidad</th>
 						<th>Fecha Compra</th>
-						<th>Editar</th>
-						<th>Eliminar</th>
+						<th>Estado</th>
 					</tr>
 				</thead>
 			<tbody>
@@ -24,8 +23,11 @@
 					<td><?= $fila['N_BECA'];?></td>
 					<td><?= $fila['CANTIDAD'];?></td>
 					<td><?= $fila['FECHA_INGRESO'];?></td>
-					<td><a href="<?php echo base_url();?>index.php/Compras/editar/<?=$fila['ID_BECA'];?>">Editar</a></td>
-					<td><a class="delete" href="<?php echo base_url();?>index.php/Compras/delete/<?=$fila['ID_BECA'];?> ">Eliminar</a></td>
+					<?php if ($fila['ESTADO'] === '1'|| $fila['ESTADO'] === null):?>
+          			<td><a href="<?php echo base_url();?>index.php/Becas/desactivar/<?=$fila['ID_BECA'];?>">Activo</a></td> 
+      				<?php elseif($fila['ESTADO'] === '0' ) :?>
+          			<td><a href="<?php echo base_url();?>index.php/Becas/activar/<?=$fila['ID_BECA'];?>">Inactivo</a></td> 
+      				<?php endif;?>
 		
 				</tr>
 			

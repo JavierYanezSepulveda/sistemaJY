@@ -29,21 +29,35 @@ class Proveedores extends CI_Controller {
 		$this->load->view('footer');
 	}
 	public function addProveedor(){
-		$this->Proveedores_model->add();
-		echo "<script>alert('¡Proveedor agregado!.');</script>";
-        redirect('Proveedores/index', 'refresh');
+		
+		$result = $this->Proveedores_model->add();
+		
+		if($result == NULL){
+			echo "<script>alert('¡Proveedor ya existe!.');</script>";
+        	redirect('Proveedores/add', 'refresh');	
+		}else{
+			echo "<script>alert('¡Proveedor agregado!.');</script>";
+        	redirect('Proveedores/index', 'refresh');
+		}
 	}
-
+		
 	public function delete($id){
 		
-          $this->load->helper('url');
-          $id = $this->uri->segment(3);
-     	  
-          $item=$this->Proveedores_model->delete($id);
-          
+        $this->load->helper('url');
+        $id = $this->uri->segment(3);
+     	$verificador1 = $this->Proveedores_model->verificar1($id);
+     	$verificador2 = $this->Proveedores_model->verificar2($id);
+     	$verificador_final = $verificador1 + $verificador2;
+    	if($verificador_final == null){  
+        	$item=$this->Proveedores_model->delete($id);
+        	echo "<script>alert('¡Proveedor eliminado!.');</script>";
+        	redirect('Proveedores/index', 'refresh');
+        }else{
+        	echo "<script> alert('Proveedor en uso, no se puede eliminar');</script>";
+          	redirect('Proveedores/index', 'refresh');
+        }
          
-		echo "<script>alert('¡Proveedor eliminado!.');</script>";
-        redirect('Proveedores/index', 'refresh');
+		
 	}
 
 	public function editar($id){
@@ -81,7 +95,7 @@ class Proveedores extends CI_Controller {
 						
 		);
 
-		$this->Proveedores_model->editar_proveedor($RUT_PROVEEDOR, $data);	
+		$this->Proveedores_model->editar_proveedor($id, $data);	
 		echo "<script>alert('¡Proveedor modificado!.');</script>";
         redirect('Proveedores/index', 'refresh');
 

@@ -8,7 +8,7 @@
  <table id="grid" class="table table-striped table-bordered dt-responsive nowrap" border="1" align="center">
   <thead>
     <tr>
-      <th>Registro</th>
+      <th>ID</th>
       <th>Nombre</th>
       <th>Precio venta</th>
       <th>Insumo</th>

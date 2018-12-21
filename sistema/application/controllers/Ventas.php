@@ -140,6 +140,108 @@ class Ventas extends CI_Controller {
         redirect('Ventas/lista_ventas', 'refresh');
 	}
 
+	public function prueba(){
+		$data = $_POST;
+
+		foreach($data as $fila => $valor) {
+					$filas[] = $fila;
+					$valores[] = $valor;
+				}
+		$y = count($data);
+		if($valores[2]== 'Normal'){
+			if($y%2 == 0){
+
+				$x = ($y-4)/2;
+				$cantidad = 'cantidad';
+				$total= 0 ;
+				
+				for($j=1;$j<=$x; $j++){
+					$n=$data[$j]; //id_producto
+					$m=$data[$cantidad.$j]; //cantidad vendida
+					$precio = $this->Ventas_model->total($n);
+					$precio2= $precio[0];
+					$precio_total = $precio2['PRECIO_V']*$m;
+					$total=$total+$precio_total; 
+				}
+
+				$item = $this->Ventas_model->add_venta($total);
+				if ($item != FALSE) {
+
+		$ultimo_id_venta = $this->db->select('ID_VENTA')->from('VENTA')->where('N_ORDEN', null)->order_by('ID_VENTA',"desc")->limit(1)->get()->row(); 
+        $ultimo_id_venta = (array) $ultimo_id_venta;
+        $ultimo=$ultimo_id_venta['ID_VENTA'];
+				
+				for($j=1;$j<=($x-2)/2; $j++){
+					$n=$data[$j];
+					$m=$data[$cantidad.$j];
+					$this->Ventas_model->add_venta_producto($n,$m,$ultimo);
+					$insumo_1 = $this->Ventas_model->insumo($n);
+					$insumo = $insumo_1[0]['ID_INSUMO'];
+					$stock_1 = $this->Ventas_model->stock($insumo);
+					$stock = $stock_1[0]['STOCK'];
+					$cantidad_total= $stock - $m;
+			  		$this->Ventas_model->descontar($insumo, $cantidad_total);
+								
+				}		
+		
+		echo "<script>alert('¡Venta realizada!.');</script>";
+ 		redirect('Ventas/add', 'refresh');
+ 		}else{
+ 			echo "<script>alert('¡Número Boleta repetido!.');</script>";
+ 			redirect('Ventas/add', 'refresh');
+ 		}
+			}elseif($y%2 == 1){
+				
+				$x = ($y-3)/2;
+				$cantidad = 'cantidad';
+				$total= 0 ;
+				
+				for($j=1;$j<=$x; $j++){
+					$n=$data[$j]; //id_producto
+					$m=$data[$cantidad.$j]; //cantidad vendida
+					$precio = $this->Ventas_model->total($n);
+					$precio2= $precio[0];
+					$precio_total = $precio2['PRECIO_V']*$m;
+					$total=$total+$precio_total; 
+				}
+
+				$item = $this->Ventas_model->add_venta($total);
+				if ($item != FALSE) {
+
+		$ultimo_id_venta = $this->db->select('ID_VENTA')->from('VENTA')->where('N_ORDEN', null)->order_by('ID_VENTA',"desc")->limit(1)->get()->row(); 
+        $ultimo_id_venta = (array) $ultimo_id_venta;
+        $ultimo=$ultimo_id_venta['ID_VENTA'];
+				
+				for($j=1;$j<=($x-2)/2; $j++){
+					$n=$data[$j];
+					$m=$data[$cantidad.$j];
+					$this->Ventas_model->add_venta_producto($n,$m,$ultimo);
+					$insumo_1 = $this->Ventas_model->insumo($n);
+					$insumo = $insumo_1[0]['ID_INSUMO'];
+					$stock_1 = $this->Ventas_model->stock($insumo);
+					$stock = $stock_1[0]['STOCK'];
+					$cantidad_total= $stock - $m;
+			  		$this->Ventas_model->descontar($insumo, $cantidad_total);
+								
+				}		
+		
+		echo "<script>alert('¡Venta realizada!.');</script>";
+ 		redirect('Ventas/add', 'refresh');
+ 		}else{
+ 			echo "<script>alert('¡Número Boleta repetido!.');</script>";
+ 			redirect('Ventas/add', 'refresh');
+ 		}
+			}
+			
+		}elseif ($valores[2] == 'Transbank') {
+			echo 'Transbank';
+			var_dump($filas[3], $valores[3], $filas[4], $valores[4]);
+		}elseif ($valores[2] == 'Beca') {
+			echo 'Beca';
+			var_dump($filas[3], $valores[3], $filas[4], $valores[4]);
+		}
+		
+	}
 	
 	
 }

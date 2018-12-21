@@ -58,5 +58,38 @@ class Ucc_model extends CI_Model {
       $this->db->update('UCC', $data);
 
     }
+
+    public function verificar1($id){
+
+        $this->db->select('ID_COMPRA');
+        $this->db->from('COMPRA');
+        $this->db->where('ID_UCC', $id);
+        $result = $this->db->get();
+        return $result->result_array();
+
+    }
+    
+        public function verificar2($id){
+
+        $this->db->select('ID_VENTA');
+        $this->db->from('VENTA');
+        $this->db->where('ID_UCC', $id);
+        $result = $this->db->get();
+        return $result->result_array();
+
+    }
+
+    public function obtener_codigo_UCC($id){
+
+      $this->db->select('NUMERO_UCC');
+      $this->db->from('UCC');
+      $this->db->where('ID_UCC', $id);
+      $result = $this->db->get();
+      return $result->result_array();
+
+
+    }
+
+
  }
 ?>

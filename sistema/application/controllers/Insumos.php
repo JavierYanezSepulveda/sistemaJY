@@ -40,9 +40,17 @@ class Insumos extends CI_Controller {
 	public function delete($id){
 		$this->load->helper('url');
         $id = $this->uri->segment(3);
-        $this->Insumos_model->delete($id);
-        echo "<script>alert('¡Insumo eliminado!');</script>";
-        redirect('Insumos/index', 'refresh');
+        $verificador1 = $this->Insumos_model->verificar1($id);
+        $verificador2 = $this->Insumos_model->verificar2($id);
+        $verificador_total = $verificador1 + $verificador2;
+        if($verificador_total == null){  
+            $item = $this->Insumos_model->delete($id);
+            echo "<script>alert('¡Insumo eliminado!.');</script>";
+            redirect('Insumos/index', 'refresh');
+        }else{
+            echo "<script> alert('Insumo en uso, no se puede eliminar');</script>";
+            redirect('Insumos/index', 'refresh'); 
+        }
 	}
 	public function editar($id){
 		$id = $this->uri->segment(3);
