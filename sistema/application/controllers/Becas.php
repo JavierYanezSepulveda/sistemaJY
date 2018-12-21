@@ -41,7 +41,7 @@ class Becas extends CI_Controller {
  			redirect('Usuarios/iniciar_sesion', 'refresh');
 		}
 	}	
-	public function lista_becas(){
+	public function index(){
 		$data['Becas'] = $this->Becas_model->obtener_becas();
 		$this->load->view('header');
 		$this->load->view('menu_lateral');

@@ -71,7 +71,7 @@
                   Compras
                 </a>
               </li><li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url();?>index.php/Becas/add" >
+                <a class="nav-link" href="<?php echo base_url();?>index.php/Becas/index" >
                   <span data-feather="file"></span>
                   Becas
                 </a>
