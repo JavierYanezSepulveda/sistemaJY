@@ -26,11 +26,12 @@ class Ventas_model extends CI_Model {
       $N_BOLETA = $this->input->post('N_BOLETA', true);
       $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
       $TIPO_VENTA = $this->input->post('select', true);
+      $VOUCHER = $this->input->post('browser', true);
       if ($TIPO_VENTA == 'Normal') {
         $this->db->where('N_BOLETA', $N_BOLETA);
        $query = $this->db->get('VENTA');
       if ($query->num_rows() == 0){
-      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, TIPO_VENTA,ID_Sucursal,ESTADO)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, 0, '$total', '$TIPO_VENTA', '$id_s', 1)";
+      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, TIPO_VENTA,ID_Sucursal,ESTADO)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, null, '$total', 0, '$id_s', 1)";
       $result = $this->db->query($data);
       return $result;
       }else{
@@ -40,25 +41,12 @@ class Ventas_model extends CI_Model {
         $this->db->where('N_BOLETA', $N_BOLETA);
        $query = $this->db->get('VENTA');
       if ($query->num_rows() == 0){
-      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, TIPO_VENTA,ID_Sucursal,ESTADO)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, 1, '$total', '$TIPO_VENTA', '$id_s', 1)";
+      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, TIPO_VENTA,ID_Sucursal,ESTADO)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, '$VOUCHER' , '$total', 1, '$id_s', 1)";
       $result = $this->db->query($data);
       return $result;
       }else{
         return FALSE;
        }
-      }elseif ($TIPO_VENTA == 'Beca') {
-         $id_s = $this->session->userdata('ID_SUCURSAL');
-      if($id_s != null){
-      $id_u = $this->session->userdata('RUT');
-      $N_BECA = $this->input->post('N_BECA', true);
-      $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
-      $CANTIDAD = $this->input->post('CANTIDAD', true);
-      $data = "INSERT INTO BECA (ID_BECA,CANTIDAD,ID_USUARIO, ID_SUCURSAL, N_BECA,FECHA_INGRESO, ESTADO)values (beca_seq.nextval, '$CANTIDAD', '$id_u','$id_s', '$N_BECA', TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 1)";
-      $result = $this->db->query($data);
-      return $result;
-      }else{
-        return null;
-      }
       }
       
    
