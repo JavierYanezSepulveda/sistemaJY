@@ -6,15 +6,15 @@
 <body>     
   <div class="container" style="margin-left: 13%">
     <h2>Crear nueva venta</h2>
-      <a href="<?php echo base_url();?>index.php/Ventas/lista_ventas" class="btn btn-default" style="margin-left: 70%">Lista de ventas</a>
+      <a href="<?php echo base_url();?>index.php/Ventas/lista_ventas" class="btn btn-default" style="margin-left: 72%">Lista de ventas</a>
       <form id="form" name="form" action="<?=base_url()?>index.php/Ventas/prueba" method="POST">
         <label for="N_BOLETA">N° BOLETA</label><br>
-        <input type="number" name="N_BOLETA" value="" min="0" max="9999999999" size="30" required/><br />
+        <input type="number" name="N_BOLETA" value="" min="0" max="9999999999" style="width: 71%" required/><br />
         <label for="FECHA_INGRESO">FECHA DE INGRESO</label><br>
-        <input type="date" name="FECHA_INGRESO" value="<?php echo date("Y-m-d");?>" size="30" required/><br />
+        <input type="date" name="FECHA_INGRESO" value="<?php echo date("Y-m-d");?>" style="width: 71%" required/><br />
         <br>
         <label>Tipo de venta</label>
-            <select name="select"  id="select"
+            <select name="select"  id="select" style="width: 71%" 
           onchange="if(this.options[this.selectedIndex].value=='Transbank'){
               toggleField(this,this.nextSibling);
               
@@ -66,7 +66,7 @@
     
     for(var i = 0; i < productos.length; i++){
       
-      tpl += "<option id=\"prod"+productos[i].ID_PRODUCTO+"\" value=\""+productos[i].ID_PRODUCTO+"\" valor=\""+productos[i].PRECIO_V+"\" data-valor=\""+productos[i].PRECIO_V+"\">"+productos[i].NOMBRE+"</option>";
+      tpl += "<option id=\"prod"+productos[i].ID_PRODUCTO+"\" value=\""+productos[i].ID_PRODUCTO+"\" valor=\""+productos[i].PRECIO_V+"\" data-valor=\""+productos[i].PRECIO_V+"\">"+productos[i].NOMBRE+" &nbsp;&nbsp;&nbsp;&nbsp;   Precio: $"+productos[i].PRECIO_V+"</option>";
     
     }
     

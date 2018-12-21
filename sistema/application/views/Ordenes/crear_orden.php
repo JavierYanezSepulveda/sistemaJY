@@ -22,7 +22,7 @@
         </select>
         <br>
         <label for="Productos">Productos</label>
-        <label for="Cantidad" style="margin-left: 26%">Cantidad</label>
+        <label for="Cantidad" >Cantidad</label>
         <br>
         <div id="seccionProductos"></div>
         <label>Total:</label>
