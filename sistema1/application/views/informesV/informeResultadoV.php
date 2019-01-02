@@ -52,11 +52,11 @@
       <td ><?php echo $item['ID_UCC'];?></td>
       <?php foreach($tipos_ventas as $item1):?>
 
-      <?php if ($item['ID_TIPO_VENTA']===0) {?>
+      <?php if ($item['ID_TIPO_VENTA']===25) {?>
           <td>0</td>
 
          
-     <?php } elseif ($item['ID_TIPO_VENTA']===1) {?>
+     <?php } elseif ($item['ID_TIPO_VENTA']===26) {?>
             <td >1</td>
             
 

@@ -161,7 +161,7 @@ class Ventas_model extends CI_Model {
 
     }
 
-     public function desactivar($id){
+    public function desactivar($id){
       $this->db->where('ID_VENTA', $id);
       $this->db->set('ESTADO', 0);
       return $this->db->update('VENTA');
@@ -202,10 +202,10 @@ public function obtener_sucursal(){
         // $query = $this->db->get('INSUMO');
       return  $result->result_array();
     }
- public function buscar($query,$query1,$id_Sucursal){
+ public function buscar($query1,$query2,$id_Sucursal){
 
-    $data="SELECT * FROM VENTA WHERE FECHA_INGRESO between TO_DATE('$query','YYYY-MM-DD') AND TO_DATE('$query1','YYYY-MM-DD')";
-    $data="SELECT * FROM VENTA WHERE ID_UCC=61  AND  ID_SUCURSAL = $id_Sucursal ";
+    $data="SELECT * FROM VENTA WHERE FECHA_INGRESO between TO_DATE('$query1','YYYY-MM-DD') AND TO_DATE('$query2','YYYY-MM-DD') AND ID_UCC = '61' AND  ID_SUCURSAL = $id_Sucursal ";
+    //$data="SELECT * FROM VENTA WHERE ID_UCC=61 AND  ID_SUCURSAL = $id_Sucursal ";
      $query=$this->db->query($data); 
  
      if ($query->num_rows()>0)
@@ -218,10 +218,10 @@ public function obtener_sucursal(){
 
 }
 
- public function buscarrango($query1,$query2,$id_sucursal){
+public function buscarrango($query1,$query2,$id_sucursal){
 
-    $data="SELECT * FROM VENTA WHERE FECHA_INGRESO between TO_DATE('$query1','YYYY-MM-DD') AND TO_DATE('$query2','YYYY-MM-DD')";
-       $data="SELECT * FROM VENTA WHERE ID_UCC!=61 AND  ID_SUCURSAL = $id_sucursal";
+    $data="SELECT * FROM VENTA WHERE FECHA_INGRESO between TO_DATE('$query1','YYYY-MM-DD') AND TO_DATE('$query2','YYYY-MM-DD') AND ID_UCC!=61 AND  ID_SUCURSAL = $id_sucursal" ;
+      // $data="SELECT * FROM VENTA WHERE ID_UCC!=61 AND  ID_SUCURSAL = $id_sucursal";
      $query=$this->db->query($data); 
      //$this->db->join('USUARIO', 'USUARIO.ID_USUARIO = VENTA.ID_USUARIO');
      //$this->db->join('UCC', 'UCC.ID_UCC = VENTA.ID_UCC');

@@ -33,4 +33,8 @@ class Welcome extends CI_Controller {
 	public function inicio(){
 		redirect('Usuarios/logueado');
 	}
+
+	public function json(){
+		$this->load->view('json');
+	}
 }
