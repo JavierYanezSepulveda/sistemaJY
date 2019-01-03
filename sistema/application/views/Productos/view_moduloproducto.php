@@ -19,6 +19,7 @@
     </tr>
   </thead>
   <tbody>
+    
    <?php foreach($productos as $item):?>
     <tr>
      

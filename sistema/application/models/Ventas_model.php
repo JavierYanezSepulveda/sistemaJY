@@ -17,11 +17,30 @@ class Ventas_model extends CI_Model {
       return  $result->result_array();
 
     }
+    public function obtener_ucc_venta($id_s){
+      $this->load->database('SCA');
+      $this->db->select('UCC_PRINCIPAL');
+      $this->db->from('SUCURSAL');
+      $this->db->where('ID_SUCURSAL', $id_s);
+      $result = $this->db->get();
+      return  $result->result_array();
+    }
+
+    public function obtener_insumo_hojas($id_s){
+      $this->load->database('SCA');
+      $this->db->select('INSUMO_CENTRAL');
+      $this->db->from('SUCURSAL');
+      $this->db->where('ID_SUCURSAL', $id_s);
+      $result = $this->db->get();
+      return  $result->result_array();
+    }
   
   
   	public function add_venta($total){
 
   	  $id_s = $this->session->userdata('ID_SUCURSAL');
+      $ucc_principal = $this->Ventas_model->obtener_ucc_venta($id_s);
+      $ucc_principal = $ucc_principal[0]['UCC_PRINCIPAL'];
       $id_u = $this->session->userdata('RUT');
       $N_BOLETA = $this->input->post('N_BOLETA', true);
       $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
@@ -31,7 +50,7 @@ class Ventas_model extends CI_Model {
         $this->db->where('N_BOLETA', $N_BOLETA);
        $query = $this->db->get('VENTA');
       if ($query->num_rows() == 0){
-      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, TIPO_VENTA,ID_Sucursal,ESTADO)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, null, '$total', 0, '$id_s', 1)";
+      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, TIPO_VENTA,ID_Sucursal,ESTADO, VOUCHER)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), '$ucc_principal', null, '$total', 0, '$id_s', 1, NULL)";
       $result = $this->db->query($data);
       return $result;
       }else{
@@ -41,7 +60,7 @@ class Ventas_model extends CI_Model {
         $this->db->where('N_BOLETA', $N_BOLETA);
        $query = $this->db->get('VENTA');
       if ($query->num_rows() == 0){
-      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, TIPO_VENTA,ID_Sucursal,ESTADO)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, '$VOUCHER' , '$total', 1, '$id_s', 1)";
+      $data = "INSERT INTO VENTA (ID_Venta,ID_Usuario,N_Boleta,N_Orden, Fecha_ingreso, ID_UCC,ID_Tipo_Venta,Total, TIPO_VENTA,ID_Sucursal,ESTADO, VOUCHER)values (venta_seq.nextval, '$id_u', '$N_BOLETA',null , TO_DATE('$FECHA_INGRESO','YY-MM-DD'), '$ucc_principal', NULL , '$total', 1, '$id_s', 1, $VOUCHER)";
       $result = $this->db->query($data);
       return $result;
       }else{
@@ -76,6 +95,7 @@ class Ventas_model extends CI_Model {
       $this->db->from('PRODUCTO');
       $this->db->where('ID_SUCURSAL', $ID_SUCURSAL);
       $this->db->where('ESTADO', 1);
+      $this->db->order_by('PRECIO_V');
       $proveedor=$this->db->get();
       return $proveedor->result_array();
     }
@@ -142,7 +162,7 @@ class Ventas_model extends CI_Model {
 
     }
 
-     public function desactivar($id){
+    public function desactivar($id){
       $this->db->where('ID_VENTA', $id);
       $this->db->set('ESTADO', 0);
       return $this->db->update('VENTA');
@@ -162,5 +182,92 @@ class Ventas_model extends CI_Model {
       return  $result->result_array();
 
     }
+
+    public function obtener_todos(){
+      $this->load->database('SCA');  
+      $this->db->select('*');
+      $this->db->from('VENTA');
+      $this->db->join('SUCURSAL', 'SUCURSAL.ID_SUCURSAL = VENTA.ID_SUCURSAL');
+      $this->db->order_by('ID_VENTA', 'asc');
+      $consulta = $this->db->get();
+     
+      return $consulta->result_array();
+   }
+public function obtener_sucursal(){
+      $this->load->database('SCA1');
+      $this->db->select('*');
+      $this->db->from('SUCURSAL');
+      $this->db->order_by('NOMBRE_S', 'asc');
+      $result = $this->db->get();
+      return  $result->result_array();
+    }
+ public function buscar($query1,$query2,$id_Sucursal){
+    $ucc_principal = $this->obtener_ucc_venta($id_Sucursal);
+    $ucc_principal = $ucc_principal[0]['UCC_PRINCIPAL'];
+    $data="SELECT * FROM VENTA WHERE FECHA_INGRESO between TO_DATE('$query1','YYYY-MM-DD') AND TO_DATE('$query2','YYYY-MM-DD') AND ID_UCC = '$ucc_principal' AND  ID_SUCURSAL = $id_Sucursal ";
+     $query=$this->db->query($data); 
+ 
+     if ($query->num_rows()>0)
+        {
+          
+            
+            return $query->result_array();
+        }else FALSE;
+
+
+}
+
+public function buscarrango($query1,$query2,$id_sucursal){
+
+    $id_s = $this->session->userdata('ID_SUCURSAL');
+    $ucc_principal = $this->obtener_ucc_venta($id_sucursal);
+    $ucc_principal = $ucc_principal[0]['UCC_PRINCIPAL'];
+    $data="SELECT * FROM VENTA WHERE FECHA_INGRESO between TO_DATE('$query1','YYYY-MM-DD') AND TO_DATE('$query2','YYYY-MM-DD') AND ID_UCC != '$ucc_principal' AND  ID_SUCURSAL = $id_sucursal" ;
+     $query=$this->db->query($data); 
+     if ($query->num_rows()>0)
+        {
+            return $query->result_array();
+        }else FALSE;
+
+}
+public function obtener_ucc(){
+      $this->load->database('SCA');
+      $this->db->select('*');
+      $this->db->from('UCC');
+      $this->db->order_by('NOMBRE', 'asc');
+      $result = $this->db->get();
+      return  $result->result_array();
+    }
+    public function obtener_tipo_venta(){
+      $this->load->database('SCA');
+      $this->db->select('*');
+      $this->db->from('TIPO_VENTA');
+      $this->db->order_by('NOMBRE', 'asc');
+      $result = $this->db->get();
+      return  $result->result_array();
+    }
+
+
+    public function obtener_itemventa(){
+      $this->load->database('SCA');
+      $this->db->select('*');
+      $this->db->from('ITEMS_VENTA');
+      $this->db->join('VENTA', 'VENTA.ID_VENTA = ITEMS_VENTA.ID_VENTA');
+      $this->db->join('PRODUCTO', 'PRODUCTO.ID_PRODUCTO = ITEMS_VENTA.ID_PRODUCTO');
+      $this->db->order_by('ID_ITEMS_VENTA', 'asc');
+      $result = $this->db->get();
+      return  $result->result_array();
+    }
+
+    public function obtener_todosproductos(){
+      $this->load->database('SCA'); 
+      $this->db->select('*');
+      $this->db->from('PRODUCTO');
+      $this->db->order_by('ID_PRODUCTO', 'asc');
+      $consulta = $this->db->get();
+     
+      return $consulta->result_array();
+   }
+
  }
 ?>

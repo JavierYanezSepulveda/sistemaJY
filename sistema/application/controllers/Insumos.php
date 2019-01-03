@@ -6,13 +6,17 @@ class Insumos extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper("url");
+		$this->load->helper("control");
 		$this->load->model("Insumos_model");
+		$this->load->model("Usuarios_model");
 		$this->load->library("session");
 		$this->load->database();
+		$this->Usuarios_model->control();
+		
 	}
 	public function index()
 	{
-		
+		// $this->Usuarios_model->control();
 		$this->load->view('header');
 		$this->load->view('menu_lateral');
 		$data['Insumos'] = $this->Insumos_model->obtener_todos();

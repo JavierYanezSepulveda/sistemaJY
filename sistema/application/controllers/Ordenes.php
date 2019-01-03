@@ -11,12 +11,14 @@ class Ordenes extends CI_Controller {
 		$this->load->model("Ucc_model");
 		$this->load->library("session");
 		$this->load->database();
+		$this->load->model("Usuarios_model");
+        $this->Usuarios_model->control();
 	}
 	
 	public function add(){
 		$id_s = $this->session->userdata('ID_SUCURSAL');
         $productos = $this->Ventas_model->obtener_productos($id_s);
-        $UCC = $this->Ucc_model->obtener_todos();
+        $UCC = $this->Ucc_model->obtener_todos_orden();
 		$data = array(
 						"productos" => $productos,
 						"UCC" => $UCC 

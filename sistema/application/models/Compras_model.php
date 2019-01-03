@@ -3,6 +3,7 @@ class Compras_model extends CI_Model {
   	public function __construct() {
      parent::__construct();
      $this->load->database();
+     $this->load->model('Ventas_model');
 
       
   	}
@@ -10,6 +11,8 @@ class Compras_model extends CI_Model {
    public function add_compra($subtotal,$total){
 
   	  $id_s = $this->session->userdata('ID_SUCURSAL');
+      $ucc_principal = $this->Ventas_model->obtener_ucc_venta($id_s);
+      $ucc_principal = $ucc_principal[0]['UCC_PRINCIPAL'];
       $id_u = $this->session->userdata('RUT');
       $N_FACTURA = $this->input->post('N_FACTURA', true);
       $FECHA_INGRESO = $this->input->post('FECHA_INGRESO', true);
@@ -17,7 +20,7 @@ class Compras_model extends CI_Model {
       $this->db->where('N_FACTURA', $N_FACTURA);
        $query = $this->db->get('COMPRA');
        if ($query->num_rows() == 0){
-      $data = "INSERT INTO COMPRA (ID_Compra,ID_Usuario,N_Factura, Fecha_ingreso, ID_UCC,Subtotal,IVA,Total, RUT_PROVEEDOR,ID_Sucursal, ESTADO) values (compra_seq.nextval, '$id_u', '$N_FACTURA', TO_DATE('$FECHA_INGRESO','YY-MM-DD'), 61, '$subtotal',null,'$total', '$RUT_PROVEEDOR', '$id_s', 1)";
+      $data = "INSERT INTO COMPRA (ID_Compra,ID_Usuario,N_Factura, Fecha_ingreso, ID_UCC,Subtotal,IVA,Total, RUT_PROVEEDOR,ID_Sucursal, ESTADO) values (compra_seq.nextval, '$id_u', '$N_FACTURA', TO_DATE('$FECHA_INGRESO','YY-MM-DD'), '$ucc_principal', '$subtotal',null,'$total', '$RUT_PROVEEDOR', '$id_s', 1)";
       $result = $this->db->query($data);
       return $result;
     }else{
@@ -34,7 +37,7 @@ class Compras_model extends CI_Model {
     }
     public function total($id_insumo){
 
-      $this->load->database('SCA');
+      $this->load->database('CSA1');
       $this->db->select('PRECIO_C');
       $this->db->from('INSUMO');
       $this->db->where('ID_INSUMO', $id_insumo);
@@ -48,7 +51,7 @@ class Compras_model extends CI_Model {
 
     public function sumar($insumo, $cantidad_total){
       
-      $this->load->database('SCA');
+      $this->load->database('CSA1');
       $this->db->set('STOCK', $cantidad_total, FALSE);
       $this->db->where('ID_INSUMO', $insumo);
       $this->db->update('INSUMO');
@@ -56,7 +59,7 @@ class Compras_model extends CI_Model {
     }
     public function obtener_compras(){
 
-      $this->load->database('SCA');
+      $this->load->database('CSA1');
       $this->db->select('*');
       $this->db->from('COMPRA');
       $this->db->order_by('FECHA_INGRESO', 'asc');
@@ -67,7 +70,7 @@ class Compras_model extends CI_Model {
 
     public function detalle_compra($id){
 
-      $this->load->database('SCA');
+      $this->load->database('CSA1');
       $this->db->select('*');
       $this->db->from('ITEMS_COMPRA');
       $this->db->where('ID_COMPRA', $id);
@@ -97,5 +100,62 @@ class Compras_model extends CI_Model {
       return  $result->result_array();
 
     }
+
+    public function obtener_todos(){
+      $this->load->database('CSA1');  
+      $this->db->select('*');
+      $this->db->from('COMPRA');
+      $this->db->join('SUCURSAL', 'SUCURSAL.ID_SUCURSAL = COMPRA.ID_SUCURSAL');
+      $this->db->order_by('ID_COMPRA', 'asc');
+      $consulta = $this->db->get();
+     
+      return $consulta->result_array();
+   }
+public function obtener_sucursal(){
+      $this->load->database('SCA');
+      $this->db->select('*');
+      $this->db->from('SUCURSAL');
+      $this->db->order_by('NOMBRE_S', 'asc');
+      $result = $this->db->get();
+      return  $result->result_array();
+    }
+public function buscar($query){
+
+    $data="SELECT * FROM COMPRA WHERE FECHA_INGRESO = TO_DATE('$query','YYYY-MM-DD')";
+   
+     $query=$this->db->query($data); 
+ 
+     if ($query->num_rows()>0)
+        {
+            
+            return $query->result_array();
+        }else FALSE;
+
+
+}
+
+ public function buscarrango($query1,$query2,$id_Sucursal){
+     
+     
+    $data="SELECT * FROM COMPRA WHERE FECHA_INGRESO between TO_DATE('$query1','YYYY-MM-DD') AND TO_DATE('$query2','YYYY-MM-DD') AND ID_SUCURSAL= $id_Sucursal ";
+
+     $query=$this->db->query($data); 
+    
+     if ($query->num_rows()>0)
+        {
+            return $query->result_array();
+        }else FALSE;
+
+}
+
+public function obtener_ucc(){
+      $this->load->database('SCA');
+      $this->db->select('*');
+      $this->db->from('UCC');
+      $this->db->order_by('NOMBRE', 'asc');
+      $result = $this->db->get();
+      return  $result->result_array();
+    }
+    
  }
 ?>

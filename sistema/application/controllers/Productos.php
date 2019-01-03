@@ -8,16 +8,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     public function __construct(){
         parent::__construct();
         $this->load->helper("url");
+        $this->load->helper("control");
+
         $this->load->model("Proveedores_model");
         $this->load->model("Insumos_model");
         $this->load->model("Productos_model");
+        
         $this->load->library("session");
         $this->load->helper('form');
         $this->load->database();
+        $this->load->model("Usuarios_model");
+        $this->Usuarios_model->control();
   }
 
 
     public function moduloproducto(){   
+        $this->load->model("Productos_model");
         $ID_SUCURSAL = $this->session->userdata('ID_SUCURSAL');
       	$data['productos'] = $this->Productos_model->obtener_todos($ID_SUCURSAL);
     	$this->load->view('header');

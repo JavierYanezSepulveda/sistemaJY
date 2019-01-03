@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+
+
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
       <link rel="stylesheet" type="text/css" media="screen" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
       <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url();?>assets/css/materialize.css" />
@@ -48,6 +50,7 @@
     <!-- Icons -->
       <script src="<?php echo base_url();?>/assets/js/feather.min.js"></script>
       <script src="<?php echo base_url();?>/assets/js/Chart.min.js"></script>
+      <script type="//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"></script>
       <script language="JavaScript" type="text/javascript">
 $(document).ready(function(){
     $("a.delete").click(function(e){
@@ -68,8 +71,64 @@ $(document).ready(function(){
       $(document).ready(function () {
           $("#grid").DataTable({
             
-
+            "language":idioma_espanol
 
           });
       });
-  </script>
+
+      var idioma_espanol={
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior",
+    },
+    "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente",
+    },
+}
+
+  </script>}
+  <nav class="navbar navbar-expand-lg navbar-blue fixed-top">
+
+      <div class="container">
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <?php if($this->session->userdata('NOMBRE')===null){?>
+
+                <a class="nav-link" href="<?php echo base_url();?>index.php/Usuarios/iniciar_sesion" class="btn btn-default"> Iniciar Sesion</a>
+
+              <?php } elseif($this->session->userdata()!=null){?>
+
+
+              <a class="nav-link" href="<?php echo base_url();?>index.php/Usuarios/cerrar_sesion" class="btn btn-default">Cerrar Sesion
+                <?php } ?>
+                </a>
+            
+
+
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>

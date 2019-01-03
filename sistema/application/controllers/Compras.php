@@ -14,6 +14,8 @@ class Compras extends CI_Controller {
 		$this->load->model("Proveedores_model");
 		$this->load->library("session");
 		$this->load->database();
+		$this->load->model("Usuarios_model");
+        $this->Usuarios_model->control();
 	}
 	
 	public function add(){

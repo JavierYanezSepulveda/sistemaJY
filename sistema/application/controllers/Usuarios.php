@@ -55,13 +55,15 @@ class Usuarios extends CI_Controller {
       $usuario_data = array(
          'logueado' => FALSE
       );
+      $this->session->sess_destroy();
       $this->session->set_userdata($usuario_data);
+
       redirect('usuarios/iniciar_sesion');
    }
 
    public function index()
    {   
-
+      $this->Usuarios_model->control();
       $ID_SUCURSAL = $this->session->userdata('ID_SUCURSAL');
       $data['usuarios'] = $this->Usuarios_model->obtener_todos($ID_SUCURSAL);
       
@@ -75,7 +77,7 @@ class Usuarios extends CI_Controller {
    }
 
    public function eliminar(){
-      
+      $this->Usuarios_model->control();
       $id = $this->uri->segment(3);
       
       $verificador1 = $this->Usuarios_model->verificar1($id);
@@ -92,7 +94,7 @@ class Usuarios extends CI_Controller {
    }
 
    public function add(){
-
+$this->Usuarios_model->control();
          $this->load->view('header');
          $this->load->view('menu_lateral');
          $this->load->view('Usuarios/crear_usuario');
@@ -103,7 +105,7 @@ class Usuarios extends CI_Controller {
    }
 
    public function addUsuario(){
-
+$this->Usuarios_model->control();
       $item = $this->Usuarios_model->add();
       if ($item != false) {
          echo "<script> alert('Usuario agregado');</script>";
@@ -116,7 +118,7 @@ class Usuarios extends CI_Controller {
    }
 
    public function edit(){
-
+$this->Usuarios_model->control();
       $id = $this->uri->segment(3);
       $obtenerUsuario = $this->Usuarios_model->obtenerUsuario($id);
       if($obtenerUsuario != FALSE){
@@ -146,6 +148,7 @@ class Usuarios extends CI_Controller {
    
 
    public function editUsuario(){
+      $this->Usuarios_model->control();
       $id = $this->uri->segment(3);
       $data = array(
                   
@@ -161,4 +164,5 @@ class Usuarios extends CI_Controller {
 
 
    }
+   
 }

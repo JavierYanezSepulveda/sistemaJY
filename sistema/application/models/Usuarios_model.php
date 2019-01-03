@@ -94,7 +94,17 @@ class Usuarios_model extends CI_Model {
       $this->db->update('USUARIO', $data);
 
     }
+    public function control(){
 
+      $control = $this->session->userdata('logueado');
+      if($control == true){
+         return true;
+      }else{
+         redirect('Usuarios/iniciar_sesion');
+      }
+
+
+   }
 
 
 }

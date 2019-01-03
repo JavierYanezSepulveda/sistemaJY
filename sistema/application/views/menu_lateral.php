@@ -78,7 +78,7 @@
               </li>
               <label>Informes</label>
               <li class="nav-item">
-                <a class="nav-link" href="#" >
+                <a class="nav-link" href="<?php echo base_url();?>index.php/Informes/informesCompras" >
                   <span data-feather="file-text"></span>
                   Informes
                 </a>
@@ -120,11 +120,7 @@
                   <span data-feather="settings"></span>
                   Usuarios
                 </a>
-              <li class="nav-item">
-                <a class="nav-link" href="#" >
-                  <span data-feather="settings"></span>
-                  Config
-                </a>
+             
                 <br><br>
 
               </li>

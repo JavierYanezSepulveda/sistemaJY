@@ -15,6 +15,20 @@ class Ucc_model extends CI_Model {
 
 	    return  $result->result_array();
   	}
+public function obtener_todos_orden(){
+      $id_s = $this->session->userdata('ID_SUCURSAL');
+      $ucc_principal = $this->Ventas_model->obtener_ucc_venta($id_s);
+      $ucc_principal = $ucc_principal[0]['UCC_PRINCIPAL'];
+      $this->load->database('SCA');
+      $this->db->select('*');
+      $this->db->from('UCC');
+      $this->db->where('ID_UCC !=', $ucc_principal);
+      $this->db->order_by('NOMBRE', 'asc');
+      $result = $this->db->get();
+
+      return  $result->result_array();
+    }
+
   	public function add(){
   	
         $NOMBRE = $this->input->post('NOMBRE');

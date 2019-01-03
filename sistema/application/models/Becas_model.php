@@ -57,6 +57,71 @@ class Becas_model extends CI_Model {
       return $this->db->update('BECA');
       
     }    
+    public function obtener_insumo($id){
+        
+      $this->load->database('SCA');
+      $this->db->select('ID_INSUMO');
+      $this->db->from('PRODUCTO');
+      $this->db->where('ID_PRODUCTO', $id);
+      $result = $this->db->get();
+      return  $result->result_array();
+    }
+  public function beca_rut($rut_alumno){
+
+    $result2 = array();
+
+    $w=0;
+
+    $result = @file_get_contents("http://desarrollo2.ucm.cl/mquezada/fotocopias/index.php/BecaApi/get_cantidad/$rut_alumno/JSON","r");
+    // $result = @file_get_contents("http:desarrollo2.ucm.cl/mbravo/fotocopias_ci/index.php/becaapi/get_cantidad/$rut_alumno","r");
+    $result2 = json_decode($result);
     
+
+ 
+
+    if($result != null){
+
+    foreach ($result2 as $dato){
+
+            $w++;
+
+        if ($w==1)
+
+          $msg=$dato;
+
+        if ($w==2)
+
+        {
+          $estado=$dato;
+          if($dato == 'FALSE')
+
+             echo "<script>alert('¡Cantidad de beca insuficiente!.');</script>";
+
+        }
+
+      }
+}else{
+
+  $msg = null;
+  $estado = null;
+}
+      $data= array("mensaje"=> $msg,
+                   "estado"  =>  $estado
+                 );
+
+     
+    if ($msg != null) {
+      return $data;
+    }else{
+      return null;
+    }
+
+   }  
+
+
+
+
+
+  
  }
 ?>

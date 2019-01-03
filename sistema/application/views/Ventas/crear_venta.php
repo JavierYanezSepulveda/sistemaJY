@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <script>        
          var cantidad = 1;   //inicializa variables globales del script usado más adelante
          var producto = 1;
@@ -13,20 +15,21 @@
         <label for="FECHA_INGRESO">FECHA DE INGRESO</label><br>
         <input type="date" name="FECHA_INGRESO" value="<?php echo date("Y-m-d");?>" style="width: 71%" required/><br />
         <br>
-        <label>Tipo de venta</label>
-            <select name="select"  id="select" style="width: 71%" 
+        <label>Tipo de venta</label><br>
+            <select name="select"  class="tipo" id="select" style="width: 71%" 
           onchange="if(this.options[this.selectedIndex].value=='Transbank'){
+              toggleField(this,this.nextSibling)}if(this.options[this.selectedIndex].value=='Beca'){
               toggleField(this,this.nextSibling);
-              
-          }if(this.options[this.selectedIndex].value=='Beca'){toggleField(this,this.nextSibling);
               
           }" >
             <option value="Normal">Normal</option>
             <option value="Transbank">Transbank</option>
             <option value="Beca">Beca</option>
             
-        </select><input name="browser" style="display:none;" disabled="disabled" 
-            onblur="if(this.value==''){toggleField(this,this.previousSibling);}">
+        </select><input name="browser" id="rut" style="display:none;" disabled="disabled" 
+            onblur="if(this.value==''){toggleField(this,this.previousSibling);}">  <div id="cantidad" ></div>
+
+
             
 
 
@@ -46,7 +49,8 @@
         <br>
         <input type="submit" value="Finalizar venta" class="btn btn-default" style="width: 40%; display: block;"/>
       </form>
- 
+   
+
   </div>
 
 </body>
@@ -70,7 +74,7 @@
     
     }
     
-    tpl += "</select></div><div class=\"col s12 m3 l4 \"><input type=\"number\" class=\"valor\" min=\"0\"name=\"cantidad"+cantidad+"\"></div></div>";
+    tpl += "</select></div><div class=\"col s12 m3 l4 \"><input type=\"number\" class=\"valor\" min=\"0\"name=\"cantidad"+cantidad+"\" required></div></div>";
     
     cantidad++;
     producto++;
@@ -108,3 +112,30 @@ function toggleField(hideObj,showObj){
   showObj.focus();
 }
 </script>
+
+<script>
+$(document).ready(function() {
+            $('#rut').keyup(function(e) {
+                var rut = $('#rut').val();
+                
+                
+    var tipo = $( "#select option:selected" ).text();
+    console.log(tipo);
+        
+if (tipo == 'Beca') {
+  
+// $.getJSON("http://desarrollo2.ucm.cl/mquezada/fotocopias/index.php/BecaApi/get_cantidad/"+rut+"/JSON", function(data) {
+        $.getJSON("http://desarrollo2.ucm.cl/mbravo/fotocopias_ci/index.php/becaapi/get_cantidad/"+rut, function(data) {
+        var text = `Cantidad de fotocopias restantes: ${data.mensaje}<br>`
+                    
+        console.log(text);
+        $("#cantidad").html(text);
+                    });
+}else{
+  text = null;
+  $("#cantidad").html(text);
+}
+    });  
+    });  
+    </script>
+

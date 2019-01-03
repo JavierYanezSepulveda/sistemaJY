@@ -32,10 +32,10 @@
       				<?php elseif($fila['TIPO_VENTA'] === '1' ) :?>
           			<td>Transbank</td> 
            			<?php endif;?>
-           			<?php if ($fila['ID_TIPO_VENTA'] === null):?>
+           			<?php if ($fila['VOUCHER'] == null):?>
           			<td>-------</td> 
-      				<?php elseif($fila['ID_TIPO_VENTA'] != 'null' ) :?>
-          			<td><?=$fila['ID_TIPO_VENTA']?></td> 
+      				<?php elseif($fila['VOUCHER'] != null ) :?>
+          			<td><?=$fila['VOUCHER']?></td> 
            			<?php endif;?>
 					<td><?= $fila['TOTAL'];?></td>
 					<?php if ($fila['ESTADO'] === '1'|| $fila['ESTADO'] === null):?>

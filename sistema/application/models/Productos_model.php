@@ -16,8 +16,7 @@ class Productos_model extends CI_Model {
       $this->db->join('SUCURSAL', 'SUCURSAL.ID_SUCURSAL = PRODUCTO.ID_SUCURSAL');
       $this->db->order_by('ID_PRODUCTO', 'asc');
       $consulta = $this->db->get();
-     
-      return $consulta->result_array();
+     return $consulta->result_array();
    }
 
 
